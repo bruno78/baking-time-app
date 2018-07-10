@@ -1,5 +1,7 @@
 # Baking Time App _in progress..._
 
+<p align="center"> <img src="https://cdn.rawgit.com/bruno78/baking-time-app/a90fd194/app/src/main/ic_launcher-web.png" width="200" alt="image of icon"></p>
+
 ## Project Summary
 
 Baking Time App allows Udacity’s resident baker-in-chief, Miriam, to share her recipes with the world. 
