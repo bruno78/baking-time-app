@@ -17,6 +17,7 @@ It allows a user to select a recipe and see video-guided steps for how to comple
 * [Room](https://developer.android.com/topic/libraries/architecture/room)
 * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
+* [Retrofit](http://square.github.io/retrofit/)
 * [ButterKnife](http://jakewharton.github.io/butterknife/) 
 * [SQLite](https://www.sqlite.org/index.html)
 * [Icons8](https://icons8.com/material-icons/)
