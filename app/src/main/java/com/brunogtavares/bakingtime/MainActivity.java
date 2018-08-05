@@ -3,6 +3,9 @@ package com.brunogtavares.bakingtime;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,7 +66,12 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
-        initViewModel();
+        boolean isConnected = checkForNetworkStatus();
+        if (isConnected) {
+            initViewModel();
+        }
+
+
     }
 
     @Override
@@ -73,28 +81,27 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
     private void initViewModel() {
 
-
-        BakingTimeService service = BakingTimeAPIClient.getRetrofitInstance().create(BakingTimeService.class);
-        Call<List<Recipe>> call = service.getAllRecipes();
-        call.enqueue(new Callback<List<Recipe>>() {
+        mViewModel.getAllRecipes().observe(this, new android.arch.lifecycle.Observer<List<Recipe>>() {
             @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                Integer statusCode = response.code();
-                Log.v("STATUS CODE!!!!!!!! : ", statusCode.toString());
+            public void onChanged(@Nullable List<Recipe> recipes) {
 
-                List<Recipe> allRecipes = response.body();
+                recipes.size();
 
-                mRecipeAdapter.setRecipeList(allRecipes);
-                mRecyclerView.setAdapter(mRecipeAdapter);
+                mRecipeAdapter.setRecipeList(recipes);
 
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-
+                // TODO display error message and or empty state
             }
         });
 
+    }
 
+    private boolean checkForNetworkStatus() {
+
+        Context context = getApplicationContext();
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 }

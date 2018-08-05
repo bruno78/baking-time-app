@@ -1,34 +1,45 @@
 package com.brunogtavares.bakingtime.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by brunogtavares on 7/11/18.
  */
 
-public class Recipe {
+public class Recipe implements Parcelable {
 
     @SerializedName("id")
-    private int id;
+    @Expose
+    private Integer id;
 
     @SerializedName("name")
+    @Expose
     private String name;
 
     @SerializedName("ingredients")
-    private List<Ingredient> ingredientList;
+    @Expose
+    private List<Ingredient> ingredientList = null;
 
     @SerializedName("steps")
-    private List<Step> stepList;
+    @Expose
+    private List<Step> stepList = null;
 
     @SerializedName("servings")
-    private int servings;
+    @Expose
+    private Integer servings;
 
     @SerializedName("image")
+    @Expose
     private String image;
 
-    public Recipe(int id, String name, List<Ingredient> ingredientList, List<Step> stepList, int servings, String image) {
+    public Recipe(Integer id, String name, List<Ingredient> ingredientList, List<Step> stepList, int servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredientList = ingredientList;
@@ -84,4 +95,57 @@ public class Recipe {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "{" + "\n" +
+                "recipe Id: " + getId() + "\n" +
+                "name: " + getName() + "\n" +
+                "ingrdients' list size: " + getIngredientList().size() + "\n" +
+                "steps' list size: " + getStepList().size() + "\n" +
+                "serving: " + getServings() + "\n" +
+                "image id path: " + getImage() + "\n" +
+                "}";
+    }
+
+    // empty constructor for serialization
+    public Recipe(){}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeList(this.ingredientList);
+        dest.writeList(this.stepList);
+        dest.writeValue(this.servings);
+        dest.writeString(this.image);
+    }
+
+    protected Recipe(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.ingredientList = in.createTypedArrayList(Ingredient.CREATOR);
+        this.stepList = in.createTypedArrayList(Step.CREATOR);
+        this.servings = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.image = in.readString();
+    }
+
+    public static  final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
+
+        @Override
+        public Recipe createFromParcel(Parcel source) {
+            return new Recipe(source);
+        }
+
+        @Override
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
+
 }

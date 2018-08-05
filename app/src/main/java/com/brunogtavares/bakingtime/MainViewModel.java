@@ -2,6 +2,8 @@ package com.brunogtavares.bakingtime;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.brunogtavares.bakingtime.model.Recipe;
@@ -21,10 +23,24 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application) {
         super(application);
         mBakingTimeRepo = BakingTimeRepository.getInstance();
-        mRecipeList = mBakingTimeRepo.getAllRecipes();
     }
 
-    public List<Recipe> getAllRecipes() {
-        return mRecipeList;
+    public LiveData<List<Recipe>> getAllRecipes() {
+
+        MutableLiveData<List<Recipe>> mutableRecipeList = new MutableLiveData<>();
+
+        if(mRecipeList == null) {
+            mutableRecipeList = mBakingTimeRepo.getAllRecipes();
+        }
+        else {
+            mutableRecipeList.setValue(mRecipeList);
+        }
+        mutableRecipeList.getValue().size();
+
+        return mutableRecipeList;
+    }
+
+    public void setRecipeList(List<Recipe> recipeList) {
+        this.mRecipeList = recipeList;
     }
 }
