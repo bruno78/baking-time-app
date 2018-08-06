@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
     private RecipeAdapter mRecipeAdapter;
     private MainViewModel mViewModel;
+    private List<Recipe> mRecipeList;
 
     @BindView(R.id.rv_recipe_list) RecyclerView mRecyclerView;
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
         // This will help to ache the viewholders and improve scrolling performance
         mRecyclerView.setItemViewCacheSize(8);
         mRecyclerView.setDrawingCacheEnabled(true);
@@ -59,10 +59,15 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         mRecyclerView.setLayoutManager(layoutManager);
 
         // Create a new adapter that takes an empty list of movies as input
+        // Initialize the list to later populate it.
+        mRecipeList = new ArrayList<>();
         mRecipeAdapter = new RecipeAdapter(this);
         mRecipeAdapter.setContext(getApplicationContext());
+        mRecipeAdapter.setRecipeList(mRecipeList);
 
         mRecyclerView.setAdapter(mRecipeAdapter);
+
+
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
@@ -79,22 +84,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         // TODO impelment Intent to detail recipe
     }
 
-    private void initViewModel() {
-
-        mViewModel.getAllRecipes().observe(this, new android.arch.lifecycle.Observer<List<Recipe>>() {
-            @Override
-            public void onChanged(@Nullable List<Recipe> recipes) {
-
-                recipes.size();
-
-                mRecipeAdapter.setRecipeList(recipes);
-
-                // TODO display error message and or empty state
-            }
-        });
-
-    }
-
     private boolean checkForNetworkStatus() {
 
         Context context = getApplicationContext();
@@ -103,5 +92,17 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
         return activeNetwork != null && activeNetwork.isConnected();
+    }
+
+    private void initViewModel() {
+        mViewModel.getRecipeList().observe(this, new android.arch.lifecycle.Observer<List<Recipe>>() {
+            @Override
+            public void onChanged(@Nullable List<Recipe> recipes) {
+                mRecipeList.clear();
+                mRecipeList = recipes;
+                mRecipeAdapter.setRecipeList(mRecipeList);
+                mRecyclerView.setAdapter(mRecipeAdapter);
+            }
+        });
     }
 }

@@ -1,6 +1,8 @@
 package com.brunogtavares.bakingtime.webservice;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 
@@ -18,42 +20,46 @@ import retrofit2.Retrofit;
 
 public class BakingTimeRepository {
 
-    private static BakingTimeService mClient;
-    final private static MutableLiveData<List<Recipe>> mRecipeList = new MutableLiveData<>();
+    private static final String LOG_TAG = BakingTimeRepository.class.getSimpleName();
 
+    private static final Object LOCK = new Object();
     private static BakingTimeRepository sInstance;
 
-    private BakingTimeRepository() {
-        mClient = BakingTimeAPIClient.getRetrofitInstance().create(BakingTimeService.class);
+    private static BakingTimeService mService;
+
+    private BakingTimeRepository(BakingTimeService service) {
+        this.mService = service;
     }
 
-    public synchronized static BakingTimeRepository getInstance() {
+    public static BakingTimeRepository getInstance() {
         if (sInstance == null) {
-            sInstance = new BakingTimeRepository();
+            synchronized (LOCK) {
+                BakingTimeService service = BakingTimeAPIClient.getRetrofitInstance().create(BakingTimeService.class);
+                sInstance = new BakingTimeRepository(service);
+            }
         }
 
         return sInstance;
     }
 
     public MutableLiveData<List<Recipe>> getAllRecipes() {
+        final MutableLiveData<List<Recipe>> recipeList = new MutableLiveData<>();
 
-        Call<List<Recipe>> call = mClient.getAllRecipes();
+        Call<List<Recipe>> call = mService.getAllRecipes();
         call.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                if (response.isSuccessful()) {
-                    mRecipeList.setValue(response.body());
-                }
+                recipeList.postValue(response.body());
 
             }
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-
+                Log.d(LOG_TAG, "Unable to retrieve data");
+                recipeList.setValue(null);
             }
         });
-        mRecipeList.getValue().size();
-        return mRecipeList;
+        return recipeList;
     }
 
 }

@@ -55,7 +55,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         Recipe recipe = mRecipeList.get(position);
 
+        String title = recipe.getName();
+        String servings = String.valueOf(recipe.getServings());
         String imageUrl = recipe.getImage();
+
         if(TextUtils.isEmpty(imageUrl)) {
             // insert an image place holder
         }
@@ -66,8 +69,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                     .into(holder.mImageCover);
         }
 
-        holder.mRecipeTitle.setText(recipe.getName());
-        holder.mServingQty.setText(recipe.getServings());
+        holder.mRecipeTitle.setText(title);
+        holder.mServingQty.setText(servings);
 
     }
 

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import com.brunogtavares.bakingtime.model.Recipe;
@@ -18,24 +19,28 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
 
     private List<Recipe> mRecipeList;
-    private BakingTimeRepository mBakingTimeRepo;
+    private BakingTimeRepository mRepo;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        mBakingTimeRepo = BakingTimeRepository.getInstance();
+        mRepo = BakingTimeRepository.getInstance();
     }
 
-    public LiveData<List<Recipe>> getAllRecipes() {
+    public LiveData<List<Recipe>> getRecipeList() {
 
         MutableLiveData<List<Recipe>> mutableRecipeList = new MutableLiveData<>();
 
         if(mRecipeList == null) {
-            mutableRecipeList = mBakingTimeRepo.getAllRecipes();
+            mutableRecipeList = mRepo.getAllRecipes();
         }
         else {
+            // Get list from savedInstanceState;
             mutableRecipeList.setValue(mRecipeList);
         }
-        mutableRecipeList.getValue().size();
+
+        if(mutableRecipeList == null) {
+            mutableRecipeList = mRepo.getAllRecipes();
+        }
 
         return mutableRecipeList;
     }
