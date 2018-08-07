@@ -61,6 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         if(TextUtils.isEmpty(imageUrl)) {
             // insert an image place holder
+            holder.mImageCover.setImageResource(R.drawable.ovent_mitten_square);
         }
         else {
             Uri uri = Uri.parse(imageUrl).buildUpon().build();

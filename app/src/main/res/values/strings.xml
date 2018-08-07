@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Baking Time</string>
+    <string name="serving_Label">Servings:</string>
 </resources>
