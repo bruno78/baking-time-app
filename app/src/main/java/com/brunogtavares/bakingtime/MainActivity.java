@@ -88,8 +88,9 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
     @Override
     public void onClick(Recipe recipe) {
+
+        Timber.v("Recipe to be send in the intent: " + recipe.toString());
         Intent intent = new Intent(this, RecipeDetailActivity.class);
-        // intent.putParcelableArrayListExtra(RECIPE_BUNDLE_KEY, recipe);
         intent.putExtra(RECIPE_BUNDLE_KEY, recipe);
         startActivity(intent);
     }

@@ -8,6 +8,9 @@ import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
 import java.util.List;
+import java.util.Objects;
+
+import timber.log.Timber;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
@@ -22,8 +25,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
-            Recipe recipe = intent.getExtras().getParcelable(RECIPE_BUNDLE_KEY);
-            mStepList = recipe.getStepList();
+            Recipe recipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
+            // mStepList = recipe.getStepList();
+            /// Timber.i("STEP LIST SIZE: " + mStepList.size());
+            Timber.i("RECIPE SIZE: " + recipe.toString());
         }
     }
 }

@@ -14,7 +14,7 @@ public class Step implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("shortDescription")
     @Expose
@@ -32,7 +32,10 @@ public class Step implements Parcelable {
     @Expose
     private String thumbnailUrl;
 
-    public Step(Integer id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
+    public Step(){}
+
+    public Step(int id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
+        super();
         this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
