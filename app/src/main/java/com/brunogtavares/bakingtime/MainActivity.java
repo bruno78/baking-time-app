@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
@@ -30,10 +31,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import timber.log.Timber;
+
+import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
 
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler {
-
-
 
     private RecipeAdapter mRecipeAdapter;
     private MainViewModel mViewModel;
@@ -47,9 +49,14 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Planting Timber
+        if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
+
+        // Bind views with ButterKnife
         ButterKnife.bind(this);
+
         // This will help to ache the viewholders and improve scrolling performance
-        mRecyclerView.setItemViewCacheSize(8);
+        mRecyclerView.setItemViewCacheSize(6);
         mRecyclerView.setDrawingCacheEnabled(true);
         mRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -81,7 +88,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
 
     @Override
     public void onClick(Recipe recipe) {
-        // TODO impelment Intent to detail recipe
+        Intent intent = new Intent(this, RecipeDetailActivity.class);
+        // intent.putParcelableArrayListExtra(RECIPE_BUNDLE_KEY, recipe);
+        intent.putExtra(RECIPE_BUNDLE_KEY, recipe);
+        startActivity(intent);
     }
 
     private boolean checkForNetworkStatus() {
@@ -101,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
                 mRecipeList.clear();
                 mRecipeList = recipes;
                 mRecipeAdapter.setRecipeList(mRecipeList);
-                mRecyclerView.setAdapter(mRecipeAdapter);
             }
         });
     }

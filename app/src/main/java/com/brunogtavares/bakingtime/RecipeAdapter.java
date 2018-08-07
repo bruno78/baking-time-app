@@ -64,6 +64,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             holder.mImageCover.setImageResource(R.drawable.ovent_mitten_square);
         }
         else {
+            // if there's an image, we use glide to insert that image.
             Uri uri = Uri.parse(imageUrl).buildUpon().build();
             Glide.with(mContext)
                     .load(uri)
@@ -87,6 +88,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public void setRecipeList(List<Recipe> recipeList) {
         this.mRecipeList = recipeList;
+        notifyDataSetChanged();
     }
 
     public class RecipeViewHolder extends ViewHolder implements View.OnClickListener {
