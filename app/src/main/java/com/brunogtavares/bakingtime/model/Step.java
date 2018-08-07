@@ -14,33 +14,29 @@ public class Step implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private int id;
-
+    private Integer id;
     @SerializedName("shortDescription")
     @Expose
     private String shortDescription;
-
     @SerializedName("description")
     @Expose
     private String description;
-
     @SerializedName("videoURL")
     @Expose
-    private String videoUrl;
-
+    private String videoURL;
     @SerializedName("thumbnailURL")
     @Expose
-    private String thumbnailUrl;
+    private String thumbnailURL;
 
     public Step(){}
 
-    public Step(int id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
+    public Step(Integer id, String shortDescription, String description, String videoUrl, String thumbnailUrl) {
         super();
         this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
-        this.videoUrl = videoUrl;
-        this.thumbnailUrl = thumbnailUrl;
+        this.videoURL = videoUrl;
+        this.thumbnailURL = thumbnailUrl;
     }
 
     public Integer getId() {
@@ -64,19 +60,19 @@ public class Step implements Parcelable {
     }
 
     public String getVideoUrl() {
-        return videoUrl;
+        return videoURL;
     }
 
     public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+        this.videoURL = videoUrl;
     }
 
     public String getThumbnailUrl() {
-        return thumbnailUrl;
+        return thumbnailURL;
     }
 
     public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailURL = thumbnailUrl;
     }
 
     @Override
@@ -89,16 +85,16 @@ public class Step implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.shortDescription);
         dest.writeString(this.description);
-        dest.writeString(this.videoUrl);
-        dest.writeString(this.thumbnailUrl);
+        dest.writeString(this.videoURL);
+        dest.writeString(this.thumbnailURL);
     }
 
     protected Step(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.shortDescription = in.readString();
         this.description = in.readString();
-        this.videoUrl = in.readString();
-        this.thumbnailUrl = in.readString();
+        this.videoURL = in.readString();
+        this.thumbnailURL = in.readString();
     }
 
     public static final Parcelable.Creator<Step> CREATOR = new Parcelable.Creator<Step>() {

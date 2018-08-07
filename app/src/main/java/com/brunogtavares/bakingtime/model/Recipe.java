@@ -18,33 +18,31 @@ public class Recipe implements Parcelable {
     @SerializedName("id")
     @Expose
     private Integer id;
-
     @SerializedName("name")
     @Expose
     private String name;
-
     @SerializedName("ingredients")
     @Expose
-    private List<Ingredient> ingredientList = null;
-
+    private List<Ingredient> ingredients = null;
     @SerializedName("steps")
     @Expose
-    private List<Step> stepList = null;
-
+    private List<Step> steps = null;
     @SerializedName("servings")
     @Expose
     private Integer servings;
-
     @SerializedName("image")
     @Expose
     private String image;
 
-    public Recipe(Integer id, String name, List<Ingredient> ingredientList, List<Step> stepList, int servings, String image) {
+    // Constructor with no args for serialization
+    public Recipe(){}
+
+    public Recipe( Integer id, String name, List<Ingredient> ingredients, List<Step> steps, Integer servings, String image) {
         super();
         this.id = id;
         this.name = name;
-        this.ingredientList = ingredientList;
-        this.stepList = stepList;
+        this.ingredients = ingredients;
+        this.steps = steps;
         this.servings = servings;
         this.image = image;
     }
@@ -65,27 +63,27 @@ public class Recipe implements Parcelable {
         this.name = name;
     }
 
-    public List<Ingredient> getIngredientList() {
-        return ingredientList;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredientList(List<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public List<Step> getStepList() {
-        return stepList;
+    public List<Step> getSteps() {
+        return steps;
     }
 
-    public void setStepList(List<Step> stepList) {
-        this.stepList = stepList;
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
     }
 
-    public int getServings() {
+    public Integer getServings() {
         return servings;
     }
 
-    public void setServings(int servings) {
+    public void setServings(Integer servings) {
         this.servings = servings;
     }
 
@@ -102,15 +100,12 @@ public class Recipe implements Parcelable {
         return "{" + "\n" +
                 "recipe Id: " + getId() + "\n" +
                 "name: " + getName() + "\n" +
-                "ingrdients list size: " + getIngredientList().size() + "\n" +
-                "steps list size: " + getStepList().size() + "\n" +
+                "ingrdients list size: " + getIngredients().size() + "\n" +
+                "steps list size: " + getSteps().size() + "\n" +
                 "serving: " + getServings() + "\n" +
                 "image id path: " + getImage() + "\n" +
                 "}";
     }
-
-    // empty constructor for serialization
-    public Recipe(){}
 
     @Override
     public int describeContents() {
@@ -121,8 +116,8 @@ public class Recipe implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
         dest.writeString(this.name);
-        dest.writeList(this.ingredientList);
-        dest.writeList(this.stepList);
+        dest.writeTypedList(this.ingredients);
+        dest.writeTypedList(this.steps);
         dest.writeValue(this.servings);
         dest.writeString(this.image);
     }
@@ -130,14 +125,13 @@ public class Recipe implements Parcelable {
     protected Recipe(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
-        this.ingredientList = in.createTypedArrayList(Ingredient.CREATOR);
-        this.stepList = in.createTypedArrayList(Step.CREATOR);
+        this.ingredients = in.createTypedArrayList(Ingredient.CREATOR);
+        this.steps = in.createTypedArrayList(Step.CREATOR);
         this.servings = (Integer) in.readValue(Integer.class.getClassLoader());
         this.image = in.readString();
     }
 
-    public static  final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
-
+    public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
         @Override
         public Recipe createFromParcel(Parcel source) {
             return new Recipe(source);
@@ -148,5 +142,4 @@ public class Recipe implements Parcelable {
             return new Recipe[size];
         }
     };
-
 }
