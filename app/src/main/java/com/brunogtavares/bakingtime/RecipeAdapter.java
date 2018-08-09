@@ -61,7 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         if(TextUtils.isEmpty(imageUrl)) {
             // insert an image place holder
-            holder.mImageCover.setImageResource(R.drawable.ovent_mitten_square);
+            holder.mImageCover.setImageResource(R.drawable.oven_mitten_round);
         }
         else {
             // if there's an image, we use glide to insert that image.

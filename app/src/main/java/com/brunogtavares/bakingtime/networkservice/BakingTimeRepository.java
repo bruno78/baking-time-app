@@ -1,18 +1,15 @@
-package com.brunogtavares.bakingtime.webservice;
+package com.brunogtavares.bakingtime.networkservice;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by brunogtavares on 8/3/18.

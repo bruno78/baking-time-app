@@ -5,11 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Recipe;
-import com.brunogtavares.bakingtime.model.Step;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
@@ -33,15 +30,13 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         }
 
-        RecipeDetailListFragment ingredientsFragment = new RecipeDetailListFragment();
+        IngredientAndStepFragment ingredientsFragment = new IngredientAndStepFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .add(R.id.fl_recipe_items_container, ingredientsFragment)
+                .add(R.id.fl_ingredient_and_step_container, ingredientsFragment)
                 .commit();
-
-
     }
 
 }

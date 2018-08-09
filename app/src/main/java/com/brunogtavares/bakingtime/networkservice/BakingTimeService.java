@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime.webservice;
+package com.brunogtavares.bakingtime.networkservice;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 

@@ -8,6 +8,7 @@ import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,28 +25,16 @@ public class RecipeDetailViewModel extends ViewModel {
         this.mRecipe = recipe;
     }
 
-    public LiveData<List<Ingredient>> getIngredients() {
-        MutableLiveData<List<Ingredient>> ingredients = new MutableLiveData<>();
+
+    public List<Object> getIngredientAndStepList() {
+
+        List<Object> ingredientAndStepList = new ArrayList<>();
 
         if (mRecipe != null) {
-            ingredients.setValue(mRecipe.getIngredients());
+            ingredientAndStepList.addAll(mRecipe.getIngredients());
+            ingredientAndStepList.addAll(mRecipe.getSteps());
         }
-
-        return ingredients;
-    }
-
-    public LiveData<List<Step>> getSteps() {
-        MutableLiveData<List<Step>> steps = new MutableLiveData<>();
-
-        if (mRecipe != null) {
-            steps.setValue(mRecipe.getSteps());
-        }
-
-        return steps;
-    }
-
-    public List<Step> getStepList() {
-        return mRecipe.getSteps();
+        return ingredientAndStepList;
     }
 
     // this will all the step data be shared between fragments
@@ -56,7 +45,5 @@ public class RecipeDetailViewModel extends ViewModel {
     public LiveData<Step> getSelected() {
         return mSelected;
     }
-
-
 
 }
