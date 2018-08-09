@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -82,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         if (isConnected) {
             initViewModel();
         }
-
 
     }
 
