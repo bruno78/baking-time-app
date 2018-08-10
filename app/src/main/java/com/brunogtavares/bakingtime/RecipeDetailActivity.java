@@ -11,17 +11,25 @@ import java.util.List;
 
 import timber.log.Timber;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class RecipeDetailActivity extends AppCompatActivity implements IngredientAndStepFragment.SelectStep {
 
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_KEY";
 
+    IngredientAndStepFragment mIngredientAndStepFragment;
+    FragmentManager mFragmentManager;
     private Recipe mRecipe;
-    private List<Object> mRecipeDetailLists;
+
+    // TODO: FINISH Implementing a click on the IngredientAndStep fragment and also the Exoplayer.
+    // TODO: Widget, Different devices, Test, Change the title of the activity for the recipe, Improve UI.
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
+        mIngredientAndStepFragment = new IngredientAndStepFragment();
+        mIngredientAndStepFragment.setSelectStep(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
@@ -30,13 +38,18 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         }
 
-        IngredientAndStepFragment ingredientsFragment = new IngredientAndStepFragment();
+        mFragmentManager = getSupportFragmentManager();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragmentManager.beginTransaction()
-                .add(R.id.fl_ingredient_and_step_container, ingredientsFragment)
+        mFragmentManager.beginTransaction()
+                .add(R.id.fl_ingredient_and_step_container, mIngredientAndStepFragment)
                 .commit();
     }
 
+    @Override
+    public void stepSelected() {
+        StepDetailFragment stepDetailFragment = new StepDetailFragment();
+        mFragmentManager.beginTransaction()
+                .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
+                .commit();
+    }
 }

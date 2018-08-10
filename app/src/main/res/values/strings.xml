@@ -7,4 +7,8 @@
     <string name="ingredients_label">Ingredients</string>
     <string name="steps_label">Steps</string>
     <string name="ingredient_example">100g of flour</string>
+    <string name="no_video_available">No video available</string>
+    <string name="description_mock">2. Whisk the graham cracker crumbs, 50 grams (1/4 cup) of sugar, and 1/2 teaspoon of salt together in a medium bowl. Pour the melted butter and 1 teaspoon of vanilla into the dry ingredients and stir together until evenly mixed.</string>
+    <string name="previous_step">Prev Step</string>
+    <string name="next_step">Next Step</string>
 </resources>

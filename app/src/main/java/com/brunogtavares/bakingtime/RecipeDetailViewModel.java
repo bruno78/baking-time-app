@@ -18,13 +18,12 @@ import java.util.List;
 public class RecipeDetailViewModel extends ViewModel {
 
     private Recipe mRecipe;
-    private final MutableLiveData<Step> mSelected = new MutableLiveData<>();
+    private Step mSelected;
 
     // this will provide data for ingredients and steps
     public void setRecipe(Recipe recipe) {
         this.mRecipe = recipe;
     }
-
 
     public List<Object> getIngredientAndStepList() {
 
@@ -39,10 +38,10 @@ public class RecipeDetailViewModel extends ViewModel {
 
     // this will all the step data be shared between fragments
     public void selectStep(Step step) {
-        mSelected.setValue(step);
+        mSelected = step;
     }
 
-    public LiveData<Step> getSelected() {
+    public Step getSelected() {
         return mSelected;
     }
 
