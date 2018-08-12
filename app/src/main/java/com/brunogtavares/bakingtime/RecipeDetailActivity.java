@@ -2,6 +2,7 @@ package com.brunogtavares.bakingtime;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,7 @@ import com.brunogtavares.bakingtime.model.Step;
 
 import timber.log.Timber;
 
-public class RecipeDetailActivity extends AppCompatActivity implements IngredientAndStepFragment.SelectStep {
+public class RecipeDetailActivity extends AppCompatActivity implements IngredientAndStepFragment.OnStepClickListener {
 
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_KEY";
     public  static final String SAVED_STEP = "SAVED_STEP";
@@ -34,37 +35,28 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
         // Get action bar and set back menu
         ActionBar actionBar = getSupportActionBar();
 
+        // Enable up button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+
         mIngredientAndStepFragment = new IngredientAndStepFragment();
         mIngredientAndStepFragment.setSelectStep(this);
 
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                int stackHeight = mFragmentManager.getBackStackEntryCount();
-                if (stackHeight > 0) {
-                    actionBar.setHomeButtonEnabled(true);
-                    actionBar.setDisplayHomeAsUpEnabled(true);
-                }
-                else {
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setHomeButtonEnabled(false);
-                    backToMainActivity();
-                }
-            }
-        });
-
         if (savedInstanceState == null) {
+
+            Intent intent = getIntent();
+            if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
+                mRecipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
+                Timber.i("RECIPE SIZE: " + mRecipe.toString());
+            }
+
+            mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.fl_ingredient_and_step_container, mIngredientAndStepFragment)
                     .addToBackStack(null)
                     .commit();
-        }
-
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
-            mRecipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
-            Timber.i("RECIPE SIZE: " + mRecipe.toString());
         }
         else {
             mRecipe = savedInstanceState.getParcelable(RECIPE_BUNDLE_KEY);
@@ -77,24 +69,34 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     }
 
     @Override
+    public  void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(RECIPE_BUNDLE_KEY, mRecipe);
+    }
+
+    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        mStep = savedInstanceState.getParcelable(SAVED_STEP);
-        initViewModel();
+        if(savedInstanceState != null && savedInstanceState.containsKey(SAVED_STEP)) {
+            mStep = savedInstanceState.getParcelable(SAVED_STEP);
+            initViewModel();
+        }
+
     }
 
-    private void backToMainActivity() {
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(intent);
-    }
 
     private void initViewModel() {
+
+        Timber.i("STEP: " + mStep.getShortDescription());
+
         RecipeDetailViewModel recipeDetailViewModel = new RecipeDetailViewModel();
         ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
         recipeDetailViewModel.setStep(mStep);
+        recipeDetailViewModel.select(mStep);
     }
 
+    // Method from Interface created at IngredientAndStep Fragment
     @Override
     public void stepSelected() {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
@@ -102,5 +104,16 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
                 .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onSupportNavigateUp();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+        return true;
     }
 }

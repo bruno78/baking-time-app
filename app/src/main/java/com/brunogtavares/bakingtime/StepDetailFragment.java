@@ -1,6 +1,7 @@
 package com.brunogtavares.bakingtime;
 
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class StepDetailFragment extends Fragment {
 
         if(savedInstanceState == null) {
 
-            mModel = ViewModelProviders.of(getActivity()).get(RecipeDetailViewModel.class);
+            mModel = ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
             mStep = mModel.getStep();
         }
         else {

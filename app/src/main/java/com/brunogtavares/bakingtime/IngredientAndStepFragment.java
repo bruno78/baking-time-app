@@ -40,24 +40,51 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     private IngredientAndStepAdapter mIngredientAndStepAdapter;
     private RecipeDetailViewModel mModel;
 
-    private SelectStep mSelectStep;
+    private OnStepClickListener mOnStepClickListener;
+
 
     public IngredientAndStepFragment() {
         // Required empty public constructor
     }
 
-    public interface SelectStep {
+    // Method from the Ingredient and Step adpater
+    @Override
+    public void onStepClick(Step step) {
+        mModel.select(step);
+        mModel.setStep(step);
+        mOnStepClickListener.stepSelected();
+    }
+
+    public interface OnStepClickListener {
         void stepSelected();
     }
 
-    public void setSelectStep(SelectStep selectStep) {
-        this.mSelectStep = selectStep;
+
+    public void setSelectStep(OnStepClickListener onStepClickListener) {
+        this.mOnStepClickListener = onStepClickListener;
     }
 
+    /**
+     * This assures the Activity has implemented the Callback
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mSelectStep = (SelectStep) context;
+
+        if (context instanceof OnStepClickListener) {
+            mOnStepClickListener = (OnStepClickListener) context;
+        }
+        else {
+            throw new RuntimeException(context.toString() +
+                    " doesn't have OnStepClickListener!");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mOnStepClickListener = null;
     }
 
     @Override
@@ -116,14 +143,5 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
 
         outState.putInt(LAST_POSITION, lastPosition);
         outState.putParcelable(LAST_RECIPE, mRecipe);
-    }
-
-    @Override
-    public void onStepClick(Step step) {
-        Timber.i("STEP SHORT DESCRIPTION: " + step.getShortDescription());
-        // mModel.select(step);
-        mModel.setStep(step);
-        mSelectStep.stepSelected();
-
     }
 }
