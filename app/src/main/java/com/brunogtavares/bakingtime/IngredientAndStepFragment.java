@@ -12,12 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
@@ -84,6 +82,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         mRecyclerView = rootView.findViewById(R.id.rv_ingredient_and_step_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mIngredientAndStepAdapter = new IngredientAndStepAdapter(mIngredientAndStepList);
+        mIngredientAndStepAdapter.setOnStepClickHandler(this);
         mRecyclerView.setAdapter(mIngredientAndStepAdapter);
 
         if(savedInstanceState != null) {
@@ -120,8 +119,11 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     }
 
     @Override
-    public void onClick(Step step) {
-        mModel.selectStep(step);
-        mSelectStep.stepSelected();;
+    public void onStepClick(Step step) {
+        Timber.i("STEP SHORT DESCRIPTION: " + step.getShortDescription());
+        // mModel.select(step);
+        mModel.setStep(step);
+        mSelectStep.stepSelected();
+
     }
 }

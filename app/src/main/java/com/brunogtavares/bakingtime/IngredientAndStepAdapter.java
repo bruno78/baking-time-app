@@ -33,7 +33,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
     private List<Object> mIngredientAndStepList;
 
     public interface OnStepClickHandler{
-        void onClick(Step step);
+        void onStepClick(Step step);
     }
     public void setOnStepClickHandler(OnStepClickHandler onStepClickHandler) {
         this.mStepClickHandler = onStepClickHandler;
@@ -133,7 +133,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
 
     /**
      * Ingredient View Holder class
-     * Since the ingredients is just the display a list of items it doesn't need a on click listener.
+     * Since the ingredients is just the display a list of items it doesn't need a click listener.
      */
     public class IngredientViewHolder extends RecyclerView.ViewHolder {
 
@@ -155,12 +155,14 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         public StepViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            mStepClickHandler.onClick((Step) mIngredientAndStepList.get(position));
+            Step selectedStep = (Step) mIngredientAndStepList.get(position);
+            mStepClickHandler.onStepClick(selectedStep);
         }
     }
 }

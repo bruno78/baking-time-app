@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
@@ -17,8 +16,9 @@ import java.util.List;
 
 public class RecipeDetailViewModel extends ViewModel {
 
+    private final MutableLiveData<Step> mSelectedStep = new MutableLiveData<Step>();
     private Recipe mRecipe;
-    private Step mSelected;
+    private Step mStep;
 
     // this will provide data for ingredients and steps
     public void setRecipe(Recipe recipe) {
@@ -36,13 +36,22 @@ public class RecipeDetailViewModel extends ViewModel {
         return ingredientAndStepList;
     }
 
-    // this will all the step data be shared between fragments
-    public void selectStep(Step step) {
-        mSelected = step;
+    public void select(Step step) {
+        this.mSelectedStep.setValue(step);
     }
 
-    public Step getSelected() {
-        return mSelected;
+    public LiveData<Step> getSelected() {
+        return mSelectedStep;
     }
+
+
+    public Step getStep() {
+        return mStep;
+    }
+
+    public void setStep(Step step) {
+        this.mStep = step;
+    }
+
 
 }
