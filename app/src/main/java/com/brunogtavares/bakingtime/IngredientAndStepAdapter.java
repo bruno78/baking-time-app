@@ -146,7 +146,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     /**
-     * Step View Holder class
+     * Step View Holder class. Each step is clickable to display more details.
      */
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

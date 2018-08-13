@@ -27,6 +27,8 @@ import static com.brunogtavares.bakingtime.RecipeDetailActivity.SAVED_STEP;
 
 /**
  * A simple {@link Fragment} subclass.
+ * This Fragment displays details of the step.
+ * 1. Title, video if available, and Description
  */
 public class StepDetailFragment extends Fragment {
 
@@ -75,8 +77,6 @@ public class StepDetailFragment extends Fragment {
     }
 
     private void populateUI() {
-
-        // Timber.i("Receiving from Ingredient Step Fragment: " + mStep.getShortDescription());
 
         String shortDescriptionString = mStep.getShortDescription();
         String descriptionString = mStep.getDescription();

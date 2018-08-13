@@ -83,7 +83,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
                 mRecipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
-                Timber.i("RECIPE INFO: " + mRecipe.toString());
+                Timber.d("RECIPE INFO: " + mRecipe.toString());
             }
         }
         else {
@@ -115,13 +115,13 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         // and steps list.
         mIngredientAndStepList = mModel.getIngredientAndStepList();
 
-        Timber.i("INGREDIENTS AND STEPS LIST SIZE: " + mIngredientAndStepList.size());
+        Timber.d("INGREDIENTS AND STEPS LIST SIZE: " + mIngredientAndStepList.size());
     }
 
     // Method from the Ingredient and Step adpater
     @Override
     public void onStepClick(Step step) {
-        Timber.i("Step from INgredientAndStep Fragment: " + step.getShortDescription());
+        Timber.d("Step from IngredientAndStep Fragment: " + step.getShortDescription());
         mModel.select(step);
         mOnStepClickListener.stepSelected();
     }
@@ -136,8 +136,8 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
 
         // saves the position of the scrolling list.
         // Since the list only has 4 elements and they almost fit on the screen
-        // it's not really necessary. It will be kept here in case for scalability
-        // (in case the number of recipe available grows).
+        // it's not really necessary but it will be kept here for scalability case
+        // (if the number of recipes available grows).
         int lastPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
                 .findFirstVisibleItemPosition();
 

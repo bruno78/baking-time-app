@@ -23,7 +23,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     private Recipe mRecipe;
     private Step mStep;
 
-    // TODO: FINISH Implementing a click on the IngredientAndStep fragment and also the Exoplayer.
+    // TODO: FINISH Exoplayer.
+    // DONE: Implementing a click on the IngredientAndStep fragment and also
     // TODO: Widget, Different devices, Test, Change the title of the activity for the recipe, Improve UI.
 
 
@@ -49,7 +50,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
             Intent intent = getIntent();
             if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
                 mRecipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
-                Timber.i("RECIPE SIZE: " + mRecipe.toString());
+                Timber.d("RECIPE SIZE: " + mRecipe.toString());
             }
 
             mFragmentManager = getSupportFragmentManager();
@@ -62,7 +63,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
             mRecipe = savedInstanceState.getParcelable(RECIPE_BUNDLE_KEY);
         }
 
-        if (mRecipe != null) {
+        if (mRecipe != null && actionBar != null) {
             actionBar.setTitle(mRecipe.getName());
         }
 
@@ -89,7 +90,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     // To be used on onRestoreInstanceState
     private void initViewModel() {
 
-        Timber.i("STEP: " + mStep.getShortDescription());
+        Timber.d("STEP: " + mStep.getShortDescription());
 
         RecipeDetailViewModel recipeDetailViewModel = new RecipeDetailViewModel();
         ViewModelProviders.of(this).get(RecipeDetailViewModel.class);

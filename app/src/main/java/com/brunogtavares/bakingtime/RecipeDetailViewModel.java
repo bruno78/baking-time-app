@@ -1,7 +1,5 @@
 package com.brunogtavares.bakingtime;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.brunogtavares.bakingtime.model.Recipe;
@@ -12,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by brunogtavares on 8/7/18.
+ * This RecipeDetailViewModel helps to manage views from
+ * IngredientAndStep Fragment and RecipeDetail Fragment.
  */
 
 public class RecipeDetailViewModel extends ViewModel {
@@ -35,10 +35,13 @@ public class RecipeDetailViewModel extends ViewModel {
         return ingredientAndStepList;
     }
 
+    // Get selected step from IngredientAndStep Fragment and displays
+    // on Step Detail Fragment
     public Step getSelected() {
         return mStep;
     }
 
+    // Sets the step when it is clicked on IngredientAndStep Fragment
     public void select(Step step) {
         this.mStep = step;
     }
