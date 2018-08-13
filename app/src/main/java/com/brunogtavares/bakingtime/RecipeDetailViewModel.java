@@ -18,6 +18,7 @@ public class RecipeDetailViewModel extends ViewModel {
 
     private Recipe mRecipe;
     private Step mStep;
+    private List<Step> mStepList;
 
     // this will provide data for ingredients and steps
     public void setRecipe(Recipe recipe) {
@@ -47,4 +48,17 @@ public class RecipeDetailViewModel extends ViewModel {
     }
 
 
+    // retrieve step for next or previous buttons
+    public Step getStep(int stepId) {
+        return mStepList != null ? mStepList.get(stepId) : null;
+    }
+
+    // retrieve number of steps for buttons
+    public int getNumberOfSteps() {
+        return mStepList != null ? mStepList.size() : 0;
+    }
+
+    public void setStepList(List<Step> stepList) {
+        this.mStepList = stepList;
+    }
 }

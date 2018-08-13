@@ -110,14 +110,22 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     @Override
     public boolean onSupportNavigateUp() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        if (count > 0) {
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (count == 2) {
+            getSupportFragmentManager().popBackStack();
+            return true;
         } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getSupportActionBar().setHomeButtonEnabled(false);
-            startActivity(new Intent(getBaseContext(), MainActivity.class));
+            return super.onSupportNavigateUp();
         }
-        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 2) {
+            getSupportFragmentManager().popBackStack();
+        }
+        else {
+            this.finish();
+        }
     }
 }

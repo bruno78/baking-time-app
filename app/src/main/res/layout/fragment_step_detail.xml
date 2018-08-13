@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
         <Button
-            android:id="@+id/bt_next_step"
+            android:id="@+id/bt_previous_step"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             android:layout_alignParentEnd="true"
             android:text="@string/previous_step"/>
         <Button
-            android:id="@+id/bt_previous_step"
+            android:id="@+id/bt_next_step"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:gravity="center"

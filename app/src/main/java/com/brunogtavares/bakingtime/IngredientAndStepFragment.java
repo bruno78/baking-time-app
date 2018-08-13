@@ -34,6 +34,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     private static final String LAST_RECIPE = "LAST_RECIPE";
 
     private Recipe mRecipe;
+    private List<Step> mStepList;
     private List<Object> mIngredientAndStepList;
 
     private RecyclerView mRecyclerView;
@@ -111,6 +112,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         // by calling getActivity().
         mModel = ViewModelProviders.of(getActivity()).get(RecipeDetailViewModel.class);
         mModel.setRecipe(mRecipe);
+        mModel.setStepList(mRecipe.getSteps());
         // Initializes the list with Object to add ingredients
         // and steps list.
         mIngredientAndStepList = mModel.getIngredientAndStepList();

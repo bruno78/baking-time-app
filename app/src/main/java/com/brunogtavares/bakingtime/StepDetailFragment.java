@@ -1,7 +1,6 @@
 package com.brunogtavares.bakingtime;
 
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,10 +11,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brunogtavares.bakingtime.model.Step;
+import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 
 import butterknife.BindView;
@@ -32,15 +33,29 @@ import static com.brunogtavares.bakingtime.RecipeDetailActivity.SAVED_STEP;
  */
 public class StepDetailFragment extends Fragment {
 
+    private static final String LAST_POSITION = "LAST_POSITION";
+    private static final String LAST_CURRENT_WINDOW = "LAST_CURRENT_WINDOW";
+    private static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
+
+    // Exoplayer
+    private SimpleExoPlayer mExoPlayer;
+    private long mPlaybackPosition = 0;
+    private int mCurrentWindow = 0;
+    private boolean mPlayWhenReady = true;
+
+    // Step
     private Step mStep;
     private RecipeDetailViewModel mModel;
     private Uri mUri;
+    private int mStepId;
+    private int mNumberOfSteps;
 
     @BindView(R.id.ep_exoplayer_view) PlayerView mPlayerView;
     @BindView(R.id.rl_no_video_holder) RelativeLayout mNoVideoImageHolder;
     @BindView(R.id.tv_step_description) TextView mStepDescription;
     @BindView(R.id.tv_step_short_description) TextView mStepShortDescription;
-
+    @BindView(R.id.bt_next_step) Button mNextButton;
+    @BindView(R.id.bt_previous_step) Button mPrevButton;
 
     public StepDetailFragment() {
         // Required empty public constructor
@@ -55,16 +70,35 @@ public class StepDetailFragment extends Fragment {
 
         ButterKnife.bind(this, rootView);
 
-        if(savedInstanceState == null) {
-
+        if(getActivity() != null) {
             mModel = ViewModelProviders.of(getActivity()).get(RecipeDetailViewModel.class);
+        }
+        if(savedInstanceState == null) {
             mStep = mModel.getSelected();
+            mStepId = mStep.getId();
+            mNumberOfSteps = mModel.getNumberOfSteps();
         }
         else {
             mStep = savedInstanceState.getParcelable(SAVED_STEP);
+            mStepId = mStep.getId();
+            mNumberOfSteps = mModel.getNumberOfSteps();
+
+            mPlaybackPosition = savedInstanceState.getLong(LAST_POSITION);
+            mCurrentWindow = savedInstanceState.getInt(LAST_CURRENT_WINDOW);
+            mPlayWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
         }
 
         populateUI();
+
+        // Set next and prev buttons onClickListeners
+        mNextButton.setOnClickListener(view -> {
+            mStepId++;
+            updateUI();
+        });
+        mPrevButton.setOnClickListener(view -> {
+            mStepId--;
+            updateUI();
+        });
 
         return rootView;
     }
@@ -78,7 +112,24 @@ public class StepDetailFragment extends Fragment {
 
     private void populateUI() {
 
+        if(mStepId < 1) {
+            mPrevButton.setEnabled(false);
+        }
+        else {
+            mPrevButton.setEnabled(true);
+        }
+
+        if(mStepId > mNumberOfSteps-2) {
+            mNextButton.setEnabled(false);
+        }
+        else {
+            mNextButton.setEnabled(true);
+        }
+
         String shortDescriptionString = mStep.getShortDescription();
+        if (mStep.getId() != 0)
+            shortDescriptionString = mStep.getId() + ". " + mStep.getShortDescription();
+
         String descriptionString = mStep.getDescription();
         // String videoUrlString = mStep.getVideoUrl();
         String videoUrlString = "";
@@ -91,12 +142,16 @@ public class StepDetailFragment extends Fragment {
             mUri = Uri.parse(videoUrlString);
             mPlayerView.setVisibility(View.VISIBLE);
             mNoVideoImageHolder.setVisibility(View.GONE);
-
         }
 
         mStepShortDescription.setText(shortDescriptionString);
         mStepDescription.setText(descriptionString);
 
+    }
+
+    private void updateUI() {
+        mStep = mModel.getStep(mStepId);
+        populateUI();
     }
 
     @Override
@@ -106,4 +161,6 @@ public class StepDetailFragment extends Fragment {
             mStep = savedInstanceState.getParcelable(SAVED_STEP);
         }
     }
+
+
 }
