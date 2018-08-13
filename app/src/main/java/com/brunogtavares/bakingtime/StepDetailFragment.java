@@ -55,8 +55,8 @@ public class StepDetailFragment extends Fragment {
 
         if(savedInstanceState == null) {
 
-            mModel = ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
-            mStep = mModel.getStep();
+            mModel = ViewModelProviders.of(getActivity()).get(RecipeDetailViewModel.class);
+            mStep = mModel.getSelected();
         }
         else {
             mStep = savedInstanceState.getParcelable(SAVED_STEP);

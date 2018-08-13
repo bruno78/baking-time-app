@@ -86,13 +86,13 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     }
 
 
+    // To be used on onRestoreInstanceState
     private void initViewModel() {
 
         Timber.i("STEP: " + mStep.getShortDescription());
 
         RecipeDetailViewModel recipeDetailViewModel = new RecipeDetailViewModel();
         ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
-        recipeDetailViewModel.setStep(mStep);
         recipeDetailViewModel.select(mStep);
     }
 
@@ -109,10 +109,13 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     @Override
     public boolean onSupportNavigateUp() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        if (count == 0) {
-            super.onSupportNavigateUp();
+        if (count > 0) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
-            getSupportFragmentManager().popBackStack();
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+            startActivity(new Intent(getBaseContext(), MainActivity.class));
         }
         return true;
     }

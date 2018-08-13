@@ -42,28 +42,6 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
 
     private OnStepClickListener mOnStepClickListener;
 
-
-    public IngredientAndStepFragment() {
-        // Required empty public constructor
-    }
-
-    // Method from the Ingredient and Step adpater
-    @Override
-    public void onStepClick(Step step) {
-        mModel.select(step);
-        mModel.setStep(step);
-        mOnStepClickListener.stepSelected();
-    }
-
-    public interface OnStepClickListener {
-        void stepSelected();
-    }
-
-
-    public void setSelectStep(OnStepClickListener onStepClickListener) {
-        this.mOnStepClickListener = onStepClickListener;
-    }
-
     /**
      * This assures the Activity has implemented the Callback
      * @param context
@@ -77,7 +55,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         }
         else {
             throw new RuntimeException(context.toString() +
-                    " doesn't have OnStepClickListener!");
+                    " must implement OnStepClickListener!");
         }
     }
 
@@ -85,6 +63,14 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     public void onDetach() {
         super.onDetach();
         mOnStepClickListener = null;
+    }
+
+    public void setSelectStep(OnStepClickListener onStepClickListener) {
+        this.mOnStepClickListener = onStepClickListener;
+    }
+
+    public IngredientAndStepFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -121,13 +107,27 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     }
 
     private void initViewModel() {
-        mModel = ViewModelProviders.of(this).get(RecipeDetailViewModel.class);
+        // Since viewModel is managing both fragments from the RecipeDetailActivity, you need to call "scope" it
+        // by calling getActivity().
+        mModel = ViewModelProviders.of(getActivity()).get(RecipeDetailViewModel.class);
         mModel.setRecipe(mRecipe);
         // Initializes the list with Object to add ingredients
         // and steps list.
         mIngredientAndStepList = mModel.getIngredientAndStepList();
 
         Timber.i("INGREDIENTS AND STEPS LIST SIZE: " + mIngredientAndStepList.size());
+    }
+
+    // Method from the Ingredient and Step adpater
+    @Override
+    public void onStepClick(Step step) {
+        Timber.i("Step from INgredientAndStep Fragment: " + step.getShortDescription());
+        mModel.select(step);
+        mOnStepClickListener.stepSelected();
+    }
+
+    public interface OnStepClickListener {
+        void stepSelected();
     }
 
     @Override

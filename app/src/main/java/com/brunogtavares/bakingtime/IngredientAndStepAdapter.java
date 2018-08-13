@@ -120,7 +120,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         String measure = RecipeUtils.convertMeasure(ingredient.getMeasure(), quantity);
         String ingredientString = ingredient.getIngredient();
 
-        return qty + measure + ingredientString;
+        return "• " + qty + measure + ingredientString;
 
     }
 

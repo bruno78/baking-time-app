@@ -16,7 +16,6 @@ import java.util.List;
 
 public class RecipeDetailViewModel extends ViewModel {
 
-    private final MutableLiveData<Step> mSelectedStep = new MutableLiveData<Step>();
     private Recipe mRecipe;
     private Step mStep;
 
@@ -36,20 +35,11 @@ public class RecipeDetailViewModel extends ViewModel {
         return ingredientAndStepList;
     }
 
-    public void select(Step step) {
-        this.mSelectedStep.setValue(step);
-    }
-
-    public LiveData<Step> getSelected() {
-        return mSelectedStep;
-    }
-
-
-    public Step getStep() {
+    public Step getSelected() {
         return mStep;
     }
 
-    public void setStep(Step step) {
+    public void select(Step step) {
         this.mStep = step;
     }
 
