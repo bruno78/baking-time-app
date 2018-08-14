@@ -16,12 +16,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.brunogtavares.bakingtime.model.Step;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 import static com.brunogtavares.bakingtime.RecipeDetailActivity.SAVED_STEP;
 
@@ -38,7 +45,7 @@ public class StepDetailFragment extends Fragment {
     private static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
 
     // Exoplayer
-    private SimpleExoPlayer mExoPlayer;
+    private SimpleExoPlayer mPlayer;
     private long mPlaybackPosition = 0;
     private int mCurrentWindow = 0;
     private boolean mPlayWhenReady = true;
@@ -94,10 +101,12 @@ public class StepDetailFragment extends Fragment {
         mNextButton.setOnClickListener(view -> {
             mStepId++;
             updateUI();
+            initializePlayer();
         });
         mPrevButton.setOnClickListener(view -> {
             mStepId--;
             updateUI();
+            initializePlayer();
         });
 
         return rootView;
@@ -110,6 +119,7 @@ public class StepDetailFragment extends Fragment {
         outState.putParcelable(SAVED_STEP, mStep);
     }
 
+    // This private method populates the UI and set the next and prev buttons accordingly.
     private void populateUI() {
 
         if(mStepId < 1) {
@@ -131,8 +141,8 @@ public class StepDetailFragment extends Fragment {
             shortDescriptionString = mStep.getId() + ". " + mStep.getShortDescription();
 
         String descriptionString = mStep.getDescription();
-        // String videoUrlString = mStep.getVideoUrl();
-        String videoUrlString = "";
+        String videoUrlString = mStep.getVideoUrl();
+        // String videoUrlString = "";
 
         if (TextUtils.isEmpty(videoUrlString)) {
             mNoVideoImageHolder.setVisibility(View.VISIBLE);
@@ -162,5 +172,78 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
+    private void initializePlayer() {
 
+        if (mPlayer == null) {
+            mPlayer = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(getActivity()),
+                    new DefaultTrackSelector(), new DefaultLoadControl());
+        }
+        mPlayerView.setPlayer(mPlayer);
+        mPlayer.setPlayWhenReady(mPlayWhenReady);
+        mPlayer.seekTo(mCurrentWindow, mPlaybackPosition);
+
+        if(mUri != null) {
+            MediaSource mediaSource = new ExtractorMediaSource.Factory(
+                    new DefaultHttpDataSourceFactory("ExoPlayer"))
+                    .createMediaSource(mUri);
+            mPlayer.prepare(mediaSource, false, false);
+        }
+    }
+
+    private void releasePlayer() {
+        if (mPlayer != null) {
+            mPlaybackPosition = mPlayer.getCurrentPosition();
+            mCurrentWindow = mPlayer.getCurrentWindowIndex();
+            mPlayWhenReady = mPlayer.getPlayWhenReady();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    // This is called onResume is just an implementation detail to have
+    // a pure screen navigation.
+    private void hideSystemUI() {
+        mPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+        | View.SYSTEM_UI_FLAG_FULLSCREEN
+        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            initializePlayer();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // hideSystemUI();
+        if (Util.SDK_INT <= 23 || mPlayer == null) {
+            initializePlayer();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            releasePlayer();
+        }
+    }
+
+    // TODO: Implement exoplayer full screen in landscape mode
+    // TODO: Fix bug issue where app crashes after rotation on Ingredients list fragment
 }

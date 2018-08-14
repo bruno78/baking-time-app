@@ -68,4 +68,10 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.8.3'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.3'
 
+    // LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
 }

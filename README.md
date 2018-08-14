@@ -14,18 +14,34 @@ It allows a user to select a recipe and see video-guided steps for how to comple
 
 ## Tools Used 
 
-* [Room](https://developer.android.com/topic/libraries/architecture/room)
-* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+* [ExoPlayer](https://github.com/google/ExoPlayer)
+* [Timber](https://github.com/JakeWharton/timber)
+* [GSON](https://github.com/google/gson)
+* [LeakCanary](https://github.com/square/leakcanary)
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
 * [Retrofit](http://square.github.io/retrofit/)
 * [ButterKnife](http://jakewharton.github.io/butterknife/) 
-* [SQLite](https://www.sqlite.org/index.html)
 * [Icons8](https://icons8.com/material-icons/)
 
 ## Instructions
 
 Download or clone this repo on your machine, open the project using Android Studio. Once Gradle builds
 the project, click "run" and choose an emulator.
+
+## Progress tasks
+
+-[x] Implement Retrofit / GSON
+-[x] Implement Repository
+-[x] Implement ViewModel to manage Recipe
+-[x] Implement ViewModel to manage communication between fragments (IngredientAndStep, StepDetail)
+-[x] Implement LeakCanary to monitor Memory leaks
+-[x] Implement ExoPlayer
+-[ ] Implement ExoPlayer full screen in landscape mode
+-[ ] Fix bug issue where app crashes after rotation on Ingredients list fragment
+-[ ] Implement Widget
+-[ ] Start Espresso Tests
+-[ ] Implement Multiple views
+-[ ] Polish Views
 
 ## License
 
