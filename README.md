@@ -44,7 +44,7 @@ the project, click "run" and choose an emulator.
 
 -[ ] Implement ExoPlayer full screen in landscape mode
 
--[ ] Fix bug issue where app crashes after rotation on Ingredients list fragment
+-[x] Fix issue where app crashes when you select a step after rotation
 
 -[ ] Implement Widget
 

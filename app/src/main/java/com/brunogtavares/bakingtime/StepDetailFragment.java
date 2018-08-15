@@ -245,5 +245,4 @@ public class StepDetailFragment extends Fragment {
     }
 
     // TODO: Implement exoplayer full screen in landscape mode
-    // TODO: Fix bug issue where app crashes after rotation on Ingredients list fragment
 }

@@ -41,6 +41,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        // Initializing Fragement manager
+        mFragmentManager = getSupportFragmentManager();
 
         mIngredientAndStepFragment = new IngredientAndStepFragment();
         mIngredientAndStepFragment.setSelectStep(this);
@@ -53,7 +55,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
                 Timber.d("RECIPE SIZE: " + mRecipe.toString());
             }
 
-            mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.fl_ingredient_and_step_container, mIngredientAndStepFragment)
                     .addToBackStack(null)
@@ -101,6 +102,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     @Override
     public void stepSelected() {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
+
         mFragmentManager.beginTransaction()
                 .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
                 .addToBackStack(null)
