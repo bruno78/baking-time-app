@@ -30,29 +30,18 @@ the project, click "run" and choose an emulator.
 
 ## Progress tasks
 
--[x] Implement Retrofit / GSON
-
--[x] Implement Repository
-
--[x] Implement ViewModel to manage Recipe
-
--[x] Implement ViewModel to manage communication between fragments (IngredientAndStep, StepDetail)
-
--[x] Implement LeakCanary to monitor Memory leaks
-
--[x] Implement ExoPlayer
-
--[ ] Implement ExoPlayer full screen in landscape mode
-
--[x] Fix issue where app crashes when you select a step after rotation
-
--[ ] Implement Widget
-
--[ ] Start Espresso Tests
-
--[ ] Implement Multiple views
-
--[ ] Polish Views
+- [x] Implement Retrofit / GSON
+- [x] Implement Repository
+- [x] Implement ViewModel to manage Recipe
+- [x] Implement ViewModel to manage communication between fragments (IngredientAndStep, StepDetail)
+- [x] Implement LeakCanary to monitor Memory leaks
+- [x] Implement ExoPlayer
+- [ ] Implement ExoPlayer full screen in landscape mode
+- [x] Fix issue where app crashes when you select a step after rotation
+- [ ] Implement Widget
+- [ ] Start Espresso Tests
+- [ ] Implement Multiple views
+- [ ] Polish Views
 
 ## License
 
