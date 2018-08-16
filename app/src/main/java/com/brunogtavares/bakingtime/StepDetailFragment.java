@@ -172,6 +172,7 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
+    // Initialize ExoPlayer
     private void initializePlayer() {
 
         if (mPlayer == null) {

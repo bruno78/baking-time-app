@@ -1,5 +1,6 @@
 package com.brunogtavares.bakingtime.utils;
 
+import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Recipe;
 
 /**
@@ -34,6 +35,18 @@ public final class RecipeUtils {
             default:
                 return " ";
         }
+    }
+
+    public static String getIngredientString(Ingredient ingredient) {
+
+        double quantity = ingredient.getQuantity();
+
+        String qty = convertQuantity(quantity);
+        String measure = convertMeasure(ingredient.getMeasure(), quantity);
+        String ingredientString = ingredient.getIngredient();
+
+        return "• " + qty + measure + ingredientString;
+
     }
 
 }

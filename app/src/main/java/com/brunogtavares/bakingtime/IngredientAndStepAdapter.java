@@ -89,7 +89,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 IngredientViewHolder ingredientViewHolder = (IngredientViewHolder) holder;
                 Ingredient ingredient = (Ingredient) mIngredientAndStepList.get(position);
                 if(ingredient != null) {
-                    ingredientViewHolder.mIngredientItem.setText(getIngredientString(ingredient));
+                    ingredientViewHolder.mIngredientItem.setText(RecipeUtils.getIngredientString(ingredient));
                 }
                 break;
             case STEP_TYPE:
@@ -111,18 +111,6 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         return mIngredientAndStepList != null ? mIngredientAndStepList.size() : 0;
     }
 
-    // Helper method to build Ingredient string properly
-    private String getIngredientString(Ingredient ingredient) {
-
-        double quantity = ingredient.getQuantity();
-
-        String qty = RecipeUtils.convertQuantity(quantity);
-        String measure = RecipeUtils.convertMeasure(ingredient.getMeasure(), quantity);
-        String ingredientString = ingredient.getIngredient();
-
-        return "• " + qty + measure + ingredientString;
-
-    }
 
     // Helper method to build Step string properly
     private String getStepString(Step step) {
