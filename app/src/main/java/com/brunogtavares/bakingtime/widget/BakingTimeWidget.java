@@ -26,6 +26,8 @@ public class BakingTimeWidget extends AppWidgetProvider {
         String emptyOven = context.getString(R.string.appwidget_text);
         if (!ingredientsJson.equals(emptyOven)) {
 
+            views.setTextViewText(R.id.tv_widget_recipe_name, recipeName);
+
             Intent serviceIntent = new Intent(context, BakingTimeWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(BakingTimeWidgetService.WIDGET_INGREDIENTS, ingredientsJson);

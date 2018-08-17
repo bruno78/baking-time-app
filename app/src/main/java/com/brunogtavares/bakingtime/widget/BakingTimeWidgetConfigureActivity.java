@@ -2,10 +2,13 @@ package com.brunogtavares.bakingtime.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,10 +22,12 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * The configuration screen for the {@link BakingTimeWidget BakingTimeWidget} AppWidget.
  */
-public class BakingTimeWidgetConfigureActivity extends Activity implements BakingTimeWidgetConfigureAdapter.OnWidgetSelectorHandler {
+public class BakingTimeWidgetConfigureActivity extends AppCompatActivity implements BakingTimeWidgetConfigureAdapter.OnWidgetSelectorHandler {
 
     private static final String PREFS_NAME = "com.brunogtavares.bakingtime.widget.BakingTimeWidget";
     private static final String PREF_PREFIX_KEY = "appwidget_";
@@ -91,18 +96,17 @@ public class BakingTimeWidgetConfigureActivity extends Activity implements Bakin
             return;
         }
 
-        BakingTimeRepository repo = BakingTimeRepository.getInstance();
-        List<Recipe> recipeList= repo.getAllRecipes().getValue();
-
         BakingTimeWidgetConfigureAdapter adapter = new BakingTimeWidgetConfigureAdapter(this);
         adapter.setContext(this);
-        adapter.setRecipeList(recipeList);
 
         RecyclerView recyclerView = findViewById(R.id.rv_widget_recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
+
+        BakingTimeRepository repo = BakingTimeRepository.getInstance();
+        repo.getAllRecipes().observe(this, adapter::setRecipeList);
     }
 
     @Override
@@ -111,6 +115,7 @@ public class BakingTimeWidgetConfigureActivity extends Activity implements Bakin
         final Context context = BakingTimeWidgetConfigureActivity.this;
 
         saveIngredientsPref(context, mAppWidgetId, recipe.getIngredients(), recipe.getName());
+
 
         // It is the responsability of the configuration activity to update the app widget.
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);

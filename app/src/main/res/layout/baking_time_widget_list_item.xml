@@ -8,14 +8,13 @@
         android:id="@+id/tv_ingredient_widget_list_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_margin="8dp"
         android:background="#09C"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
         android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold|italic" />
 
 </RelativeLayout>

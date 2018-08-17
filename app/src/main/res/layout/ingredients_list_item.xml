@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:padding="16dp"
-        android:textColor="@android:color/white"
         android:textSize="16sp"
+        android:textColor="@android:color/white"
         tools:text="@string/ingredient_example" />
 
 </LinearLayout>

@@ -79,7 +79,7 @@ class BakingTimeWidgetViewsFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public int getCount() {
-        return mIngredientList !=null ? mIngredientList.size() : 0;
+        return mIngredientList != null ? mIngredientList.size() : 0;
     }
 
     @Override
