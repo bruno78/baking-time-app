@@ -30,7 +30,7 @@ public class BakingTimeWidgetConfigureAdapter extends RecyclerView.Adapter<Bakin
         void onWidgetSelectorClick(Recipe recipe);
     }
 
-    public BakingTimeWidgetConfigureAdapter(OnWidgetSelectorHandler widgetHandler) {
+    BakingTimeWidgetConfigureAdapter(OnWidgetSelectorHandler widgetHandler) {
         this.mWidgetHandler = widgetHandler;
     }
 

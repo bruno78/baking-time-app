@@ -30,10 +30,10 @@ This is the set of requirements to complete the project.
 
 - [ ] Application makes use of Espresso to test aspects of the UI.
 
-- [ ] Application sensibly utilizes a third-party library to enhance the app's features. That could be helper library to interface with ContentProviders if you choose to store the recipes, a UI binding library to avoid writing findViewById a bunch of times, or something similar.
+- [x] Application sensibly utilizes a third-party library to enhance the app's features. That could be helper library to interface with ContentProviders if you choose to store the recipes, a UI binding library to avoid writing findViewById a bunch of times, or something similar.
 
 ## Homescreen Widget
 
-- [ ] Application has a companion homescreen widget.
+- [x] Application has a companion homescreen widget.
 
-- [ ] Widget displays ingredient list for desired recipe.
+- [x] Widget displays ingredient list for desired recipe.

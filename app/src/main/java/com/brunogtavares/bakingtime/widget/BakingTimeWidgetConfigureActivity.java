@@ -116,8 +116,7 @@ public class BakingTimeWidgetConfigureActivity extends AppCompatActivity impleme
 
         saveIngredientsPref(context, mAppWidgetId, recipe.getIngredients(), recipe.getName());
 
-
-        // It is the responsability of the configuration activity to update the app widget.
+        // It is the responsibility of the configuration activity to update the app widget.
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         BakingTimeWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 

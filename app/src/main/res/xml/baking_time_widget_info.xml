@@ -3,9 +3,9 @@
     android:configure="com.brunogtavares.bakingtime.widget.BakingTimeWidgetConfigureActivity"
     android:initialKeyguardLayout="@layout/baking_time_widget"
     android:initialLayout="@layout/baking_time_widget"
-    android:minHeight="40dp"
+    android:minHeight="48dp"
     android:minWidth="210dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/appwidget_preview_min"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen" />

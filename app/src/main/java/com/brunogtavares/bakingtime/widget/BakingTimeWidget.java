@@ -31,7 +31,6 @@ public class BakingTimeWidget extends AppWidgetProvider {
             Intent serviceIntent = new Intent(context, BakingTimeWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(BakingTimeWidgetService.WIDGET_INGREDIENTS, ingredientsJson);
-            serviceIntent.putExtra(BakingTimeWidgetService.WIDGET_RECIPE_NAME, recipeName);
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
             views.setRemoteAdapter(R.id.lv_ingredient_widget_listview, serviceIntent);
         }

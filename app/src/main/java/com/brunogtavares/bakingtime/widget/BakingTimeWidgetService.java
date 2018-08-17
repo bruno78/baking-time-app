@@ -24,7 +24,6 @@ import java.util.List;
 public class BakingTimeWidgetService extends RemoteViewsService {
 
     public final static String WIDGET_INGREDIENTS = "WIDGET_INGREDIENTS";
-    public final static String WIDGET_RECIPE_NAME = "WIDGET_RECIPE_NAME";
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
