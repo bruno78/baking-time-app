@@ -36,6 +36,8 @@ the project, click "run" and choose an emulator.
 - [x] Implement ViewModel to manage communication between fragments (IngredientAndStep, StepDetail)
 - [x] Implement LeakCanary to monitor Memory leaks
 - [x] Implement ExoPlayer
+- [ ] Fix back button 
+- [ ] Improve Exoplayer buffering
 - [ ] Implement ExoPlayer full screen in landscape mode
 - [x] Fix issue where app crashes when you select a step after rotation
 - [x] Implement Widget
