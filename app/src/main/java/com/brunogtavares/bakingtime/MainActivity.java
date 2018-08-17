@@ -3,6 +3,7 @@ package com.brunogtavares.bakingtime;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.brunogtavares.bakingtime.IdlingResource.SimpleIdlingResource;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.utils.NetworkUtils;
 import com.squareup.leakcanary.LeakCanary;
@@ -24,6 +26,18 @@ import timber.log.Timber;
 import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
 
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler {
+
+    // This is for testing using Espresso Idling Resource
+    @Nullable
+    public SimpleIdlingResource mIdlingResource;
+
+    @Nullable
+    @VisibleForTesting
+    public SimpleIdlingResource getIdlingResource() {
+        return mIdlingResource == null ?
+                mIdlingResource = new SimpleIdlingResource() : mIdlingResource;
+    }
+
 
     private RecipeAdapter mRecipeAdapter;
     private MainViewModel mViewModel;

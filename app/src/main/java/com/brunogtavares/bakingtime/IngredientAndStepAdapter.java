@@ -96,7 +96,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 StepViewHolder stepViewHolder = (StepViewHolder) holder;
                 Step step = (Step) mIngredientAndStepList.get(position);
                 if(step != null) {
-                    stepViewHolder.mStepListItem.setText(getStepString(step));
+                    stepViewHolder.mStepListItem.setText(RecipeUtils.getStepString(step));
                 }
                 break;
             default:
@@ -111,13 +111,6 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         return mIngredientAndStepList != null ? mIngredientAndStepList.size() : 0;
     }
 
-
-    // Helper method to build Step string properly
-    private String getStepString(Step step) {
-
-        return step.getId() == 0 ? step.getShortDescription() :
-                step.getId() + ". " + step.getShortDescription();
-    }
 
     /**
      * Ingredient View Holder class

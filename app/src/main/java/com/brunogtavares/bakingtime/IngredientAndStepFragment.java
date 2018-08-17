@@ -12,12 +12,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import timber.log.Timber;
 
 import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
@@ -34,7 +37,6 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     private static final String LAST_RECIPE = "LAST_RECIPE";
 
     private Recipe mRecipe;
-    private List<Step> mStepList;
     private List<Object> mIngredientAndStepList;
 
     private RecyclerView mRecyclerView;
@@ -42,6 +44,9 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
     private RecipeDetailViewModel mModel;
 
     private OnStepClickListener mOnStepClickListener;
+
+    @BindView(R.id.tv_recipe_detail_name) TextView mRecipeName;
+    @BindView(R.id.tv_recipe_detail_serving_quantity) TextView mRecipeServingsQty;
 
     /**
      * This assures the Activity has implemented the Callback
@@ -80,6 +85,8 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_ingredient_and_step, container, false);
 
+        ButterKnife.bind(this, rootView);
+
         if(savedInstanceState == null) {
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
@@ -92,6 +99,9 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         }
 
         initViewModel();
+
+        mRecipeName.setText(mRecipe.getName());
+        mRecipeServingsQty.setText(String.valueOf(mRecipe.getServings()));
 
         mRecyclerView = rootView.findViewById(R.id.rv_ingredient_and_step_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

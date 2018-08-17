@@ -2,6 +2,7 @@ package com.brunogtavares.bakingtime.utils;
 
 import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Recipe;
+import com.brunogtavares.bakingtime.model.Step;
 
 /**
  * Created by brunogtavares on 8/9/18.
@@ -47,6 +48,12 @@ public final class RecipeUtils {
 
         return "• " + qty + measure + ingredientString;
 
+    }
+
+    public static String getStepString(Step step) {
+
+        return step.getId() == 0 ? step.getShortDescription() :
+                step.getId() + ". " + step.getShortDescription();
     }
 
 }
