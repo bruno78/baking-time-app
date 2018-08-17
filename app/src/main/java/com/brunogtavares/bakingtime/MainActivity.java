@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.utils.NetworkUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         // Bind views with ButterKnife
         ButterKnife.bind(this);
 
-        // This will help to ache the viewholders and improve scrolling performance
+        // This will help to cache the viewholders and improve performance
         mRecyclerView.setItemViewCacheSize(6);
         mRecyclerView.setDrawingCacheEnabled(true);
         mRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);

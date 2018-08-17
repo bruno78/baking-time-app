@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
-    private static final String LOG_TAG = RecipeAdapter.class.getSimpleName();
-
     private List<Recipe> mRecipeList;
     private Context mContext;
     private final RecipeAdapterOnClickHandler mClickHandler;
