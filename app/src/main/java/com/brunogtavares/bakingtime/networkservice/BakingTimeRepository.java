@@ -1,6 +1,8 @@
 package com.brunogtavares.bakingtime.networkservice;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.brunogtavares.bakingtime.model.Recipe;

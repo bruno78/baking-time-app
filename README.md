@@ -41,9 +41,14 @@ the project, click "run" and choose an emulator.
 - [ ] Implement ExoPlayer full screen in landscape mode
 - [x] Fix issue where app crashes when you select a step after rotation
 - [x] Implement Widget
-- [ ] Start Espresso Tests
+- [x] Start Espresso Tests
 - [ ] Implement Multiple views
 - [ ] Polish Views
+
+Optionals
+
+- [ ] Click on the widget to get to Recipe Details
+- [ ] Add tests to click on next and previous button 
 
 ## License
 

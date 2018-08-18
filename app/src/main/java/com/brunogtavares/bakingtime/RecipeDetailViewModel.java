@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
+import com.brunogtavares.bakingtime.networkservice.BakingTimeRepository;
 
 import java.util.ArrayList;
 import java.util.List;

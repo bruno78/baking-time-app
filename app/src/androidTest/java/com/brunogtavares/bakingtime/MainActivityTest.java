@@ -2,10 +2,13 @@ package com.brunogtavares.bakingtime;
 
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 
 import org.junit.After;
@@ -17,8 +20,10 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Created by brunogtavares on 8/17/18.
@@ -41,20 +46,27 @@ public class MainActivityTest {
     }
 
     @Test
-    public void openApp_showRecipes() {
-        // This test checks if Recycler view has at least 1 item
-        RecyclerView recyclerView = mActivityTestRule.getActivity().findViewById(R.id.rv_recipe_list);
-        int count = recyclerView.getAdapter().getItemCount();
-        if (count > 0) {
-            onView(withId(R.id.rv_recipe_list))
-                    .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+    public void openApp_allRecipesLoaded() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        onView(withId(R.id.rv_recipe_list)).check((view, noViewFoundException) -> {
+            if (noViewFoundException != null) {
+                throw noViewFoundException;
+            }
+
+            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView.Adapter adapter = recyclerView.getAdapter();
+            assertThat(adapter.getItemCount(), is(4));
+        });
     }
 
     @Test
     public void clickOnRecipe_takesToRecipeDetail() {
-        int POSITION = 2;
-        String RECIPE_NAME = "Yellow Cake";
+        int POSITION = 0;
+        String RECIPE_NAME = "Nutella Pie";
 
         // First, go to the position that needs to be matched
         // 1. find the view
@@ -65,13 +77,4 @@ public class MainActivityTest {
         // 3. check if the view does what it's expected
         onView(withId(R.id.tv_recipe_detail_name)).check(matches(withText(RECIPE_NAME)));
     }
-
-    @Test
-    public void clickOnRecipeStep_takesToStepDetail() {
-        int POSITION = 9;
-        String STEP_NAME = "";
-        onView(withId(R.id.rv_ingredient_and_step_list))
-                .perform( RecyclerViewActions.actionOnItemAtPosition(POSITION, click()));
-    }
-
 }

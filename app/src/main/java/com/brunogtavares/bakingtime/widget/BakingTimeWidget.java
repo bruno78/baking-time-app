@@ -1,5 +1,6 @@
 package com.brunogtavares.bakingtime.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -14,6 +15,8 @@ import com.brunogtavares.bakingtime.R;
  * App Widget Configuration implemented in {@link BakingTimeWidgetConfigureActivity BakingTimeWidgetConfigureActivity}
  */
 public class BakingTimeWidget extends AppWidgetProvider {
+
+
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {

@@ -44,7 +44,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // Initializing Fragement manager
+        // Initializing Fragment manager
         mFragmentManager = getSupportFragmentManager();
 
         mIngredientAndStepFragment = new IngredientAndStepFragment();
