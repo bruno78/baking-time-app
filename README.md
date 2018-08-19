@@ -17,7 +17,6 @@ It allows a user to select a recipe and see video-guided steps for how to comple
 * [ExoPlayer](https://github.com/google/ExoPlayer)
 * [Timber](https://github.com/JakeWharton/timber)
 * [GSON](https://github.com/google/gson)
-* [LeakCanary](https://github.com/square/leakcanary)
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
 * [Retrofit](http://square.github.io/retrofit/)
 * [ButterKnife](http://jakewharton.github.io/butterknife/) 

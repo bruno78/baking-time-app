@@ -3,14 +3,12 @@ package com.brunogtavares.bakingtime;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
-import android.support.v7.widget.RecyclerView;
 
 import com.brunogtavares.bakingtime.model.Recipe;
+import com.brunogtavares.bakingtime.ui.RecipeDetail.RecipeDetailActivity;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +20,9 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
+import static com.brunogtavares.bakingtime.ui.RecipeDetail.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
 
 /**
  * Created by brunogtavares on 8/17/18.

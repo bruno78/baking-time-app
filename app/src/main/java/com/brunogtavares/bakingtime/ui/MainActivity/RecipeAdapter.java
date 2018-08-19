@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.MainActivity;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.bumptech.glide.Glide;
 

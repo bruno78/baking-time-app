@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.RecipeDetail;
 
 import android.arch.lifecycle.ViewModel;
 

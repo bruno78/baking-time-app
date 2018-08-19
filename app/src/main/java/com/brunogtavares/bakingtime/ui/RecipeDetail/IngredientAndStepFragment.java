@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.RecipeDetail;
 
 
 import android.arch.lifecycle.ViewModelProviders;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
@@ -22,8 +23,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
-
-import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
 
 
 /**
@@ -89,8 +88,8 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
 
         if(savedInstanceState == null) {
             Intent intent = getActivity().getIntent();
-            if (intent != null && intent.hasExtra(RECIPE_BUNDLE_KEY)) {
-                mRecipe = intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
+            if (intent != null && intent.hasExtra(RecipeDetailActivity.RECIPE_BUNDLE_KEY)) {
+                mRecipe = intent.getParcelableExtra(RecipeDetailActivity.RECIPE_BUNDLE_KEY);
                 Timber.d("RECIPE INFO: " + mRecipe.toString());
             }
         }

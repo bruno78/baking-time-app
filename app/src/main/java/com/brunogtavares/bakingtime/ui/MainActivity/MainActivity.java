@@ -1,9 +1,7 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.MainActivity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +12,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.brunogtavares.bakingtime.BuildConfig;
 import com.brunogtavares.bakingtime.IdlingResource.SimpleIdlingResource;
+import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Recipe;
+import com.brunogtavares.bakingtime.ui.RecipeDetail.RecipeDetailActivity;
 import com.brunogtavares.bakingtime.utils.NetworkUtils;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
-
-import static com.brunogtavares.bakingtime.RecipeDetailActivity.RECIPE_BUNDLE_KEY;
 
 public class MainActivity extends AppCompatActivity implements RecipeAdapter.RecipeAdapterOnClickHandler {
 
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
     public void onClick(Recipe recipe) {
         Timber.v("Recipe to be send in the intent: " + recipe.toString());
         Intent intent = new Intent(this, RecipeDetailActivity.class);
-        intent.putExtra(RECIPE_BUNDLE_KEY, recipe);
+        intent.putExtra(RecipeDetailActivity.RECIPE_BUNDLE_KEY, recipe);
         startActivity(intent);
     }
 

@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.RecipeDetail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 

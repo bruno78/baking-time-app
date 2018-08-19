@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.brunogtavares.bakingtime.IngredientAndStepFragment">
+    tools:context="com.brunogtavares.bakingtime.ui.RecipeDetail.IngredientAndStepFragment">
 
     <TextView
         android:id="@+id/tv_recipe_detail_name"

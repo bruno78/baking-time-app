@@ -1,4 +1,4 @@
-package com.brunogtavares.bakingtime;
+package com.brunogtavares.bakingtime.ui.RecipeDetail;
 
 
 import android.arch.lifecycle.ViewModelProviders;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Step;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
@@ -30,8 +31,6 @@ import com.google.android.exoplayer2.util.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.brunogtavares.bakingtime.RecipeDetailActivity.SAVED_STEP;
 
 
 /**
@@ -85,7 +84,7 @@ public class StepDetailFragment extends Fragment {
             mStep = mModel.getSelected();
         }
         else {
-            mStep = savedInstanceState.getParcelable(SAVED_STEP);
+            mStep = savedInstanceState.getParcelable(RecipeDetailActivity.SAVED_STEP);
             mPlaybackPosition = savedInstanceState.getLong(LAST_POSITION);
             mCurrentWindow = savedInstanceState.getInt(LAST_CURRENT_WINDOW);
             mPlayWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
@@ -119,7 +118,7 @@ public class StepDetailFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putParcelable(SAVED_STEP, mStep);
+        outState.putParcelable(RecipeDetailActivity.SAVED_STEP, mStep);
     }
 
     // This private method populates the UI and set the next and prev buttons accordingly.
@@ -176,7 +175,7 @@ public class StepDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            mStep = savedInstanceState.getParcelable(SAVED_STEP);
+            mStep = savedInstanceState.getParcelable(RecipeDetailActivity.SAVED_STEP);
         }
     }
 

@@ -2,14 +2,13 @@ package com.brunogtavares.bakingtime;
 
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
+
+import com.brunogtavares.bakingtime.ui.MainActivity.MainActivity;
 
 import org.junit.After;
 import org.junit.Before;
