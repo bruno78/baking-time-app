@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tv_steps_list_item"
     android:layout_width="match_parent"
     android:layout_height="@dimen/recipe_list_box_size"
     android:layout_marginBottom="@dimen/min_margin"
     android:layout_marginTop="@dimen/min_margin"
     android:padding="@dimen/small_padding"
-    android:background="@color/colorAccent"
-    android:textColor="@android:color/white"
-    android:textSize="@dimen/recipe_list_title"
-    android:gravity="center"
-    tools:text="@string/hello_blank_fragment" />
+    android:background="@color/colorAccent">
+    <ImageView
+        android:id="@+id/iv_video_thumbnail"
+        android:layout_width="@dimen/medium_thumbnail"
+        android:layout_height="@dimen/medium_thumbnail"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/oven_mitten_round"/>
+
+    <TextView
+        android:id="@+id/tv_steps_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/recipe_list_small_font"
+        android:gravity="center_vertical"
+        tools:text="@string/hello_blank_fragment"/>
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -58,17 +59,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         String servings = String.valueOf(recipe.getServings());
         String imageUrl = recipe.getImage();
 
-        if(TextUtils.isEmpty(imageUrl)) {
-            // insert an image place holder
-            holder.mImageCover.setImageResource(R.drawable.oven_mitten_round);
-        }
-        else {
-            // if there's an image, we use glide to insert that image.
-            Uri uri = Uri.parse(imageUrl).buildUpon().build();
-            Glide.with(mContext)
-                    .load(uri)
-                    .into(holder.mImageCover);
-        }
+        Uri uri = Uri.parse(imageUrl).buildUpon().build();
+        Glide.with(mContext)
+                .load(uri)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.icons8_oven_mitten_96_round)
+                        .fallback(R.drawable.icons8_oven_mitten_96_round)
+                        .error(R.drawable.icons8_oven_mitten_96_round))
+                .into(holder.mImageCover);
 
         holder.mRecipeTitle.setText(title);
         holder.mServingQty.setText(servings);

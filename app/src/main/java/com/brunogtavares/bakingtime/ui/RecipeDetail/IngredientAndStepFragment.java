@@ -105,6 +105,7 @@ public class IngredientAndStepFragment extends Fragment implements IngredientAnd
         mRecyclerView = rootView.findViewById(R.id.rv_ingredient_and_step_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mIngredientAndStepAdapter = new IngredientAndStepAdapter(mIngredientAndStepList);
+        mIngredientAndStepAdapter.setContext(getContext());
         mIngredientAndStepAdapter.setOnStepClickHandler(this);
         mRecyclerView.setAdapter(mIngredientAndStepAdapter);
 

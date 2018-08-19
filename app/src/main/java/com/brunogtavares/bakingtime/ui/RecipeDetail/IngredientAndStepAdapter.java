@@ -1,16 +1,23 @@
 package com.brunogtavares.bakingtime.ui.RecipeDetail;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brunogtavares.bakingtime.R;
 import com.brunogtavares.bakingtime.model.Ingredient;
 import com.brunogtavares.bakingtime.model.Step;
 import com.brunogtavares.bakingtime.utils.RecipeUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -32,6 +39,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
 
     private OnStepClickHandler mStepClickHandler;
     private List<Object> mIngredientAndStepList;
+    private Context mContext;
 
     public interface OnStepClickHandler{
         void onStepClick(Step step);
@@ -54,7 +62,6 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         }
         return -1;
     }
-
 
     @NonNull
     @Override
@@ -97,6 +104,16 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 Step step = (Step) mIngredientAndStepList.get(position);
                 if(step != null) {
                     stepViewHolder.mStepListItem.setText(RecipeUtils.getStepString(step));
+
+                    Uri uri = Uri.parse(step.getThumbnailUrl()).buildUpon().build();
+                    Glide.with(mContext)
+                            .load(uri)
+                            .apply(new RequestOptions()
+                            .placeholder(R.drawable.icons8_oven_mitten_96_round)
+                            .fallback(R.drawable.icons8_oven_mitten_96_round)
+                            .error(R.drawable.icons8_oven_mitten_96_round))
+                            .into(stepViewHolder.mVideoThumbnail);
+
                 }
                 break;
             default:
@@ -104,6 +121,15 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 step = (Step) mIngredientAndStepList.get(position);
                 if(step != null) {
                     stepViewHolder.mStepListItem.setText(RecipeUtils.getStepString(step));
+
+                    Uri uri = Uri.parse(step.getThumbnailUrl()).buildUpon().build();
+                    Glide.with(mContext)
+                            .load(uri)
+                            .apply(new RequestOptions()
+                                    .placeholder(R.drawable.icons8_oven_mitten_96_round)
+                                    .fallback(R.drawable.icons8_oven_mitten_96_round)
+                                    .error(R.drawable.icons8_oven_mitten_96_round))
+                            .into(stepViewHolder.mVideoThumbnail);
                 }
                 break;
         }
@@ -115,6 +141,9 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
         return mIngredientAndStepList != null ? mIngredientAndStepList.size() : 0;
     }
 
+    public void setContext(Context context) {
+        this.mContext = context;
+    }
 
     /**
      * Ingredient View Holder class
@@ -136,6 +165,7 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
     public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tv_steps_list_item) TextView mStepListItem;
+        @BindView(R.id.iv_video_thumbnail) ImageView mVideoThumbnail;
 
         public StepViewHolder(View itemView) {
             super(itemView);

@@ -51,6 +51,7 @@ Next steps:
 - [ ] Add tests to click on next and previous button 
 - [ ] Loading icon 
 - [ ] Improve UI looks
+- [ ] Click on the widget to change recipe ingredients
 
 ## License
 

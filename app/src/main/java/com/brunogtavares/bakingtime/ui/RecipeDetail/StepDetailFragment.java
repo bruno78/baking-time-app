@@ -42,7 +42,7 @@ public class StepDetailFragment extends Fragment {
 
     private static final String LAST_POSITION = "LAST_POSITION";
     private static final String LAST_CURRENT_WINDOW = "LAST_CURRENT_WINDOW";
-    private static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
+    public static final String PLAY_WHEN_READY = "PLAY_WHEN_READY";
 
     // Exoplayer
     private SimpleExoPlayer mPlayer;
@@ -90,6 +90,11 @@ public class StepDetailFragment extends Fragment {
             mPlayWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
         }
 
+        Bundle bundle = new Bundle();
+        if(bundle != null && bundle.containsKey(PLAY_WHEN_READY)) {
+            mPlayWhenReady = bundle.getBoolean(PLAY_WHEN_READY);
+        }
+
         mStepId = mStep.getId();
         mNumberOfSteps = mModel.getNumberOfSteps();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -118,25 +123,28 @@ public class StepDetailFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        outState.putLong(LAST_POSITION, mPlayer.getCurrentPosition());
+        outState.putInt(LAST_CURRENT_WINDOW, mPlayer.getCurrentWindowIndex());
+        outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
         outState.putParcelable(RecipeDetailActivity.SAVED_STEP, mStep);
     }
 
     // This private method populates the UI and set the next and prev buttons accordingly.
     private void populateUI() {
 
-        if(mStepId < 1) {
+        if (mStepId < 1) {
             mPrevButton.setEnabled(false);
         }
         else {
             mPrevButton.setEnabled(true);
         }
-
-        if(mStepId > mNumberOfSteps-2) {
+        if (mStepId > mNumberOfSteps-2) {
             mNextButton.setEnabled(false);
         }
         else {
             mNextButton.setEnabled(true);
         }
+
 
         String shortDescriptionString = mStep.getShortDescription();
         if (mStep.getId() != 0)
@@ -168,7 +176,14 @@ public class StepDetailFragment extends Fragment {
 
     private void updateUI() {
         mStep = mModel.getStep(mStepId);
+        resetPlayerPosition();
         populateUI();
+    }
+
+    private void resetPlayerPosition() {
+        mPlaybackPosition = 0;
+        mCurrentWindow = 0;
+        mPlayWhenReady = true;
     }
 
     @Override

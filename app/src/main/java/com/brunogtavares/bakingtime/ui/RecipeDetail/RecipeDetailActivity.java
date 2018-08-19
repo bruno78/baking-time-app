@@ -14,6 +14,8 @@ import com.brunogtavares.bakingtime.model.Step;
 
 import timber.log.Timber;
 
+import static com.brunogtavares.bakingtime.ui.RecipeDetail.StepDetailFragment.PLAY_WHEN_READY;
+
 public class RecipeDetailActivity extends AppCompatActivity implements IngredientAndStepFragment.OnStepClickListener {
 
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_KEY";
@@ -79,6 +81,12 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
         if(savedInstanceState != null && savedInstanceState.containsKey(SAVED_STEP)) {
             mStep = savedInstanceState.getParcelable(SAVED_STEP);
             initViewModel();
+        }
+
+        if(savedInstanceState != null && savedInstanceState.containsKey(PLAY_WHEN_READY)) {
+            boolean playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(PLAY_WHEN_READY, playWhenReady);
         }
 
     }
