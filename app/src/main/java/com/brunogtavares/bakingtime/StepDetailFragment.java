@@ -100,7 +100,6 @@ public class StepDetailFragment extends Fragment {
             populateUI();
         }
 
-
         // Set next and prev buttons onClickListeners
         mNextButton.setOnClickListener(view -> {
             mStepId++;

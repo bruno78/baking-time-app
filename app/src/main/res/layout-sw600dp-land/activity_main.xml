@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="8dp"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryLight"
     tools:context="com.brunogtavares.bakingtime.MainActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="8dp"
         android:id="@+id/rv_recipe_list_tablet"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

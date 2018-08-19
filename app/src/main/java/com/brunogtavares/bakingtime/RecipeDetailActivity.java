@@ -63,10 +63,6 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
             mRecipe = savedInstanceState.getParcelable(RECIPE_BUNDLE_KEY);
         }
 
-        if (mRecipe != null && actionBar != null) {
-            actionBar.setTitle(mRecipe.getName());
-        }
-
     }
 
     @Override
@@ -110,7 +106,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
         else {
             mFragmentManager.beginTransaction()
                     .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
-                    .addToBackStack(null)
+                    .addToBackStack(stepDetailFragment.getClass().getName())
                     .commit();
         }
 
