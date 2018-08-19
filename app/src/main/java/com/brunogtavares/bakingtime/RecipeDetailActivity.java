@@ -3,14 +3,11 @@ package com.brunogtavares.bakingtime;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.brunogtavares.bakingtime.IdlingResource.SimpleIdlingResource;
 import com.brunogtavares.bakingtime.model.Recipe;
 import com.brunogtavares.bakingtime.model.Step;
 
@@ -26,15 +23,14 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     private Recipe mRecipe;
     private Step mStep;
 
-    // TODO: FINISH Exoplayer.
-    // DONE: Implementing a click on the IngredientAndStep fragment and also
-    // TODO: Different devices, Test, Improve UI.
-
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
+
+        mTwoPane = findViewById(R.id.fl_step_detail_container) != null;
 
         // Get action bar and set back menu
         ActionBar actionBar = getSupportActionBar();
@@ -106,10 +102,18 @@ public class RecipeDetailActivity extends AppCompatActivity implements Ingredien
     public void stepSelected() {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
 
-        mFragmentManager.beginTransaction()
-                .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
-                .addToBackStack(null)
-                .commit();
+        if(mTwoPane) {
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fl_step_detail_container, stepDetailFragment)
+                    .commit();
+        }
+        else {
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fl_ingredient_and_step_container, stepDetailFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
+
     }
 
     @Override

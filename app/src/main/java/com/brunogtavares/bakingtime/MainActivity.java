@@ -2,11 +2,14 @@ package com.brunogtavares.bakingtime;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
                 mIdlingResource = new SimpleIdlingResource() : mIdlingResource;
     }
 
+    private RecyclerView.LayoutManager mLayoutManager;
 
     private RecipeAdapter mRecipeAdapter;
     private MainViewModel mViewModel;
@@ -53,8 +57,16 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         // Planting Timber
         if(BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
 
-        // Bind views with ButterKnife
-        ButterKnife.bind(this);
+
+        if (findViewById(R.id.rv_recipe_list) != null) {
+            // Bind views with ButterKnife
+            ButterKnife.bind(this);
+            mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        }
+        else {
+            mRecyclerView = (RecyclerView) findViewById(R.id.rv_recipe_list_tablet);
+            mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        }
 
         // This will help to cache the viewholders and improve performance
         mRecyclerView.setItemViewCacheSize(6);
@@ -63,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         // Create a new adapter that takes an empty list of movies as input
         // Initialize the list to later populate it.
@@ -81,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         if (isConnected) {
             initViewModel();
         }
-
     }
 
     @Override
@@ -93,13 +103,10 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
     }
 
     private void initViewModel() {
-        mViewModel.getRecipeList().observe(this, new android.arch.lifecycle.Observer<List<Recipe>>() {
-            @Override
-            public void onChanged(@Nullable List<Recipe> recipes) {
-                mRecipeList.clear();
-                mRecipeList = recipes;
-                mRecipeAdapter.setRecipeList(mRecipeList);
-            }
+        mViewModel.getRecipeList().observe(this, recipes -> {
+            mRecipeList.clear();
+            mRecipeList = recipes;
+            mRecipeAdapter.setRecipeList(mRecipeList);
         });
     }
 }

@@ -2,6 +2,7 @@ package com.brunogtavares.bakingtime;
 
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -82,20 +83,23 @@ public class StepDetailFragment extends Fragment {
         }
         if(savedInstanceState == null) {
             mStep = mModel.getSelected();
-            mStepId = mStep.getId();
-            mNumberOfSteps = mModel.getNumberOfSteps();
         }
         else {
             mStep = savedInstanceState.getParcelable(SAVED_STEP);
-            mStepId = mStep.getId();
-            mNumberOfSteps = mModel.getNumberOfSteps();
-
             mPlaybackPosition = savedInstanceState.getLong(LAST_POSITION);
             mCurrentWindow = savedInstanceState.getInt(LAST_CURRENT_WINDOW);
             mPlayWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
         }
 
-        populateUI();
+        mStepId = mStep.getId();
+        mNumberOfSteps = mModel.getNumberOfSteps();
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            populateVideoUI();
+        }
+        else {
+            populateUI();
+        }
+
 
         // Set next and prev buttons onClickListeners
         mNextButton.setOnClickListener(view -> {
@@ -141,23 +145,29 @@ public class StepDetailFragment extends Fragment {
             shortDescriptionString = mStep.getId() + ". " + mStep.getShortDescription();
 
         String descriptionString = mStep.getDescription();
+
+        populateVideoUI();
+
+        mStepShortDescription.setText(shortDescriptionString);
+        mStepDescription.setText(descriptionString);
+
+    }
+
+    private void populateVideoUI() {
         String videoUrlString = mStep.getVideoUrl();
-        // String videoUrlString = "";
 
         if (TextUtils.isEmpty(videoUrlString)) {
             mNoVideoImageHolder.setVisibility(View.VISIBLE);
             mPlayerView.setVisibility(View.GONE);
+            // TODO: IMPLEMENT NO VIDEO THUMB
         }
         else {
             mUri = Uri.parse(videoUrlString);
             mPlayerView.setVisibility(View.VISIBLE);
             mNoVideoImageHolder.setVisibility(View.GONE);
         }
-
-        mStepShortDescription.setText(shortDescriptionString);
-        mStepDescription.setText(descriptionString);
-
     }
+
 
     private void updateUI() {
         mStep = mModel.getStep(mStepId);
@@ -223,7 +233,10 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // hideSystemUI();
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            hideSystemUI();
+        }
         if (Util.SDK_INT <= 23 || mPlayer == null) {
             initializePlayer();
         }
@@ -245,5 +258,4 @@ public class StepDetailFragment extends Fragment {
         }
     }
 
-    // TODO: Implement exoplayer full screen in landscape mode
 }

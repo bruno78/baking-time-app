@@ -2,8 +2,7 @@
     <string name="app_name">Baking Time</string>
     <string name="serving_Label">Servings:</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Nutella Pie</string>
     <string name="ingredients_label">Ingredients</string>
     <string name="steps_label">Steps</string>
     <string name="ingredient_example">100g of flour</string>

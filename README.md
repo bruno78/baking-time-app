@@ -37,12 +37,13 @@ the project, click "run" and choose an emulator.
 - [x] Implement LeakCanary to monitor Memory leaks
 - [x] Implement ExoPlayer
 - [ ] Fix back button 
-- [ ] Improve Exoplayer buffering
-- [ ] Implement ExoPlayer full screen in landscape mode
+- [x] Improve Exoplayer buffering
+- [x] Implement ExoPlayer full screen in landscape mode
 - [x] Fix issue where app crashes when you select a step after rotation
 - [x] Implement Widget
 - [x] Start Espresso Tests
-- [ ] Implement Multiple views
+- [x] Implement Multiple views
+- [ ] Code de dimensions properly
 - [ ] Polish Views
 
 Optionals
