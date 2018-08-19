@@ -8,23 +8,27 @@
 
     <TextView
         android:id="@+id/tv_recipe_detail_name"
+        android:paddingStart="@dimen/standard_padding"
+        android:paddingEnd="@dimen/standard_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
+        android:textSize="@dimen/frame_layout_recipe_title"
         tools:text="Brownies"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/standard_padding"
+        android:paddingEnd="@dimen/standard_padding"
+        android:layout_marginBottom="@dimen/margin_bottom">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/layout_margin"
             android:text="@string/serving_Label"/>
         <TextView
             android:id="@+id/tv_recipe_detail_serving_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             tools:text="8"/>
     </LinearLayout>
     <android.support.v7.widget.RecyclerView

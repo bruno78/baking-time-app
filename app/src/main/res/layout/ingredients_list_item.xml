@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:padding="16dp"
-        android:textSize="16sp"
+        android:padding="@dimen/standard_padding"
+        android:textSize="@dimen/second_title_size"
         android:textColor="@android:color/white"
         tools:text="@string/ingredient_example" />
 

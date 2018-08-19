@@ -9,7 +9,7 @@
     tools:context="com.brunogtavares.bakingtime.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/layout_margin"
         android:id="@+id/rv_recipe_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

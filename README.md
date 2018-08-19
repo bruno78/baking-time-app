@@ -43,8 +43,8 @@ the project, click "run" and choose an emulator.
 - [x] Implement Widget
 - [x] Start Espresso Tests
 - [x] Implement Multiple views
-- [ ] Code de dimensions properly
-- [ ] Polish Views
+- [x] Code de dimensions properly - define at values/dimens resource
+- [x] Polish Views
 
 Optionals
 

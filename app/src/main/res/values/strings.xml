@@ -13,4 +13,5 @@
     <string name="appwidget_text">Empty Oven</string>
     <string name="add_widget">Add widget</string>
     <string name="configure">Please select a recipe to add widget.</string>
+    <string name="recipe_image_holder">recipe image holder</string>
 </resources>

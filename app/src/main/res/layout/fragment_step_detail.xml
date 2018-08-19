@@ -13,9 +13,9 @@
         <TextView
             android:id="@+id/tv_step_short_description"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/second_title_bar_height"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textSize="@dimen/second_title_size"
             android:background="@color/colorPrimaryLight"
             android:textColor="@color/colorAccent"
             tools:text="Recipe Step" />
@@ -23,8 +23,8 @@
         <RelativeLayout
             android:id="@+id/rl_no_video_holder"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="@dimen/video_height"
+            android:layout_marginBottom="@dimen/margin_bottom"
             android:visibility="gone">
 
             <ImageView
@@ -42,7 +42,7 @@
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/ep_exoplayer_view"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="@dimen/video_height"
             android:background="@android:color/black"
             app:fastforward_increment="1000"
             app:rewind_increment="1000"/>
@@ -51,7 +51,7 @@
             android:id="@+id/tv_step_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="@dimen/standard_padding"
             tools:text="@string/description_mock"/>
     </LinearLayout>
     <LinearLayout
@@ -61,7 +61,7 @@
         <Button
             android:id="@+id/bt_previous_step"
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/no_width"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_alignParentEnd="true"
@@ -69,7 +69,7 @@
         <Button
             android:id="@+id/bt_next_step"
             android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/no_width"
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="@string/next_step"/>
