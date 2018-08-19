@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.brunogtavares.bakingtime.BuildConfig;
 import com.brunogtavares.bakingtime.IdlingResource.SimpleIdlingResource;
@@ -89,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Rec
         boolean isConnected = NetworkUtils.checkForNetworkStatus(getApplicationContext());
         if (isConnected) {
             initViewModel();
+        }
+        else {
+            Toast.makeText(this, getText(R.string.internet_error), Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClassName("com.android.phone", "com.android.phone.NetworkSetting");
+            startActivity(intent);
         }
     }
 
