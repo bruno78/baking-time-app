@@ -17,7 +17,6 @@ import com.brunogtavares.bakingtime.R;
 public class BakingTimeWidget extends AppWidgetProvider {
 
 
-
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         // Construct the RemoteViews object

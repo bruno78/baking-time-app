@@ -30,6 +30,7 @@ import static org.hamcrest.core.Is.is;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
+
     private IdlingResource mIdlingResource;
 
     @Rule public final ActivityTestRule<MainActivity> mActivityTestRule =
@@ -67,11 +68,23 @@ public class MainActivityTest {
         int POSITION = 0;
         String RECIPE_NAME = "Nutella Pie";
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // First, go to the position that needs to be matched
         // 1. find the view
         // 2. Perform action on the view
         onView(withId(R.id.rv_recipe_list))
                 .perform( RecyclerViewActions.actionOnItemAtPosition(POSITION, click()));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // 3. check if the view does what it's expected
         onView(withId(R.id.tv_recipe_detail_name)).check(matches(withText(RECIPE_NAME)));

@@ -123,11 +123,11 @@ public class RecipeDetailActivityTest {
 //        onView(withId(R.id.bt_next_step)).perform(click());
 //
 //        try {
-//            Thread.sleep(2000);
+//            Thread.sleep(5000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-//        onView(withId(R.id.tv_step_short_description)).check(matches(withText(SHORT_DESCRIPTION)));
+//        onView(withId(R.id.tv_step_short_description)).check(matches(withText(NEXT_SHORT_DESCRIPTION)));
 //    }
 
 

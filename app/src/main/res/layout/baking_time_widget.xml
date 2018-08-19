@@ -12,13 +12,15 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:layout_width="@dimen/widget_square"
+            android:layout_weight="1"
+            android:layout_width="@dimen/no_width"
             android:layout_height="@dimen/widget_square"
             android:src="@drawable/icons8_oven_mitten_96_round"/>
 
         <TextView
+            android:layout_weight="3"
             android:id="@+id/tv_widget_recipe_name"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/no_width"
             android:layout_height="match_parent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
@@ -27,6 +29,17 @@
             android:gravity="center_vertical"
             android:textSize="@dimen/widget_font_title"
             android:text="@string/app_name" />
+
+        <!-- This is set to gone for implementation later -->
+        <ImageButton
+            android:id="@+id/ib_widget_settings_button"
+            android:layout_weight="1"
+            android:layout_width="@dimen/no_width"
+            android:layout_height="@dimen/widget_square"
+            android:tint="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/ic_settings_black_24dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <ListView
