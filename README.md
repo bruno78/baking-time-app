@@ -46,10 +46,12 @@ the project, click "run" and choose an emulator.
 - [x] Code de dimensions properly - define at values/dimens resource
 - [x] Polish Views
 
-Optionals
+Next steps:
 
 - [ ] Click on the widget to get to Recipe Details
 - [ ] Add tests to click on next and previous button 
+- [ ] Loading icon 
+- [ ] Improve UI looks
 
 ## License
 

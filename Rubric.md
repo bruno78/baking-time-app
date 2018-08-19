@@ -16,11 +16,11 @@ This is the set of requirements to complete the project.
 
 - [x] App uses RecyclerView and can handle recipe steps that include videos or images.
 
-- [ ] App conforms to common standards found in the [Android Nanodegree General Project Guidelines.](http://udacity.github.io/android-nanodegree-guidelines/core.html)
+- [x] App conforms to common standards found in the [Android Nanodegree General Project Guidelines.](http://udacity.github.io/android-nanodegree-guidelines/core.html)
 
 ## Components and Libraries
 
-- [ ] Application uses Master Detail Flow to display recipe steps and navigation between them.
+- [x] Application uses Master Detail Flow to display recipe steps and navigation between them.
 
 - [x] Application uses Exoplayer to display videos.
 

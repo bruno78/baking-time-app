@@ -29,11 +29,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/oven_cooker_80"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/recipe_list_small_font"
                 android:gravity="center"
                 android:text="@string/no_video_available"/>
 
@@ -45,7 +47,7 @@
             android:layout_height="@dimen/video_height"
             android:background="@android:color/black"
             app:fastforward_increment="1000"
-            app:rewind_increment="1000"/>
+            app:rewind_increment="1000" />
 
         <TextView
             android:id="@+id/tv_step_description"
@@ -65,6 +67,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_alignParentEnd="true"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:text="@string/previous_step"/>
         <Button
             android:id="@+id/bt_next_step"
@@ -72,6 +76,8 @@
             android:layout_width="@dimen/no_width"
             android:gravity="center"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:text="@string/next_step"/>
     </LinearLayout>
 </RelativeLayout>

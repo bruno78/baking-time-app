@@ -158,7 +158,6 @@ public class StepDetailFragment extends Fragment {
         if (TextUtils.isEmpty(videoUrlString)) {
             mNoVideoImageHolder.setVisibility(View.VISIBLE);
             mPlayerView.setVisibility(View.GONE);
-            // TODO: IMPLEMENT NO VIDEO THUMB
         }
         else {
             mUri = Uri.parse(videoUrlString);

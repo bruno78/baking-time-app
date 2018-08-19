@@ -72,7 +72,6 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 viewHolder = new StepViewHolder(stepView);
                 break;
             default:
-                // TODO: Fix this
                 View defaultView = inflater.inflate(R.layout.steps_list_item, parent, false);
                 viewHolder = new StepViewHolder(defaultView);
                 break;
@@ -100,8 +99,12 @@ public class IngredientAndStepAdapter extends RecyclerView.Adapter<RecyclerView.
                 }
                 break;
             default:
-                // TODO FIX THIS
-
+                stepViewHolder = (StepViewHolder) holder;
+                step = (Step) mIngredientAndStepList.get(position);
+                if(step != null) {
+                    stepViewHolder.mStepListItem.setText(RecipeUtils.getStepString(step));
+                }
+                break;
         }
     }
 

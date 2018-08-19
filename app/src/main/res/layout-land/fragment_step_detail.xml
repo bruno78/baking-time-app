@@ -31,7 +31,8 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/oven_cooker_80"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,6 +68,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_alignParentEnd="true"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:text="@string/previous_step"/>
         <Button
             android:id="@+id/bt_next_step"
@@ -74,6 +77,8 @@
             android:layout_width="@dimen/no_width"
             android:gravity="center"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:text="@string/next_step"/>
     </LinearLayout>
 </RelativeLayout>
