@@ -252,6 +252,9 @@ public class StepDetailFragment extends Fragment {
         if (Util.SDK_INT <= 23 || mPlayer == null) {
             initializePlayer();
         }
+        if(mPlaybackPosition != 0 && mPlayer != null) {
+            mPlayer.seekTo(mCurrentWindow, mPlaybackPosition);
+        }
     }
 
     @Override
