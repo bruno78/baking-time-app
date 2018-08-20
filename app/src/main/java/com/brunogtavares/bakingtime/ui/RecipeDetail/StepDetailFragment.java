@@ -128,6 +128,9 @@ public class StepDetailFragment extends Fragment {
             outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
         }
         else {
+            // For SDK <= 23 you will need to save mPlayBackPosition and mCurrentWindow and mPlayWhenReady
+            // before releasing the player so when onSaveInstanceState is called you can store this values here
+            // because mPlayer will be null by then.
             outState.putLong(LAST_POSITION, mPlaybackPosition);
             outState.putInt(LAST_CURRENT_WINDOW, mCurrentWindow);
             outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
