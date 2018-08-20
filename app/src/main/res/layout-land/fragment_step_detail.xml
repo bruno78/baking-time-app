@@ -46,6 +46,7 @@
             android:id="@+id/ep_exoplayer_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/black"
             app:fastforward_increment="1000"
             app:rewind_increment="1000"/>
 

@@ -10,7 +10,7 @@ It allows a user to select a recipe and see video-guided steps for how to comple
 ## Pre-requisites
 
 * Android SDK v26
-* Android min SDK v23
+* Android min SDK v17
 
 ## Tools Used 
 

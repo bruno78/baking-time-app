@@ -68,7 +68,6 @@ public class StepDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +90,7 @@ public class StepDetailFragment extends Fragment {
         }
 
         Bundle bundle = new Bundle();
-        if(bundle != null && bundle.containsKey(PLAY_WHEN_READY)) {
+        if(bundle.containsKey(PLAY_WHEN_READY)) {
             mPlayWhenReady = bundle.getBoolean(PLAY_WHEN_READY);
         }
 
@@ -126,6 +125,11 @@ public class StepDetailFragment extends Fragment {
         if(mPlayer != null) {
             outState.putLong(LAST_POSITION, mPlayer.getCurrentPosition());
             outState.putInt(LAST_CURRENT_WINDOW, mPlayer.getCurrentWindowIndex());
+            outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
+        }
+        else {
+            outState.putLong(LAST_POSITION, mPlaybackPosition);
+            outState.putInt(LAST_CURRENT_WINDOW, mCurrentWindow);
             outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
         }
 
@@ -249,7 +253,8 @@ public class StepDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
+                getResources().getConfiguration().screenWidthDp < 600) {
             hideSystemUI();
         }
         if (Util.SDK_INT <= 23 || mPlayer == null) {
