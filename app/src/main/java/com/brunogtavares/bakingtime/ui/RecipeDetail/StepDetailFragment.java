@@ -123,9 +123,12 @@ public class StepDetailFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putLong(LAST_POSITION, mPlayer.getCurrentPosition());
-        outState.putInt(LAST_CURRENT_WINDOW, mPlayer.getCurrentWindowIndex());
-        outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
+        if(mPlayer != null) {
+            outState.putLong(LAST_POSITION, mPlayer.getCurrentPosition());
+            outState.putInt(LAST_CURRENT_WINDOW, mPlayer.getCurrentWindowIndex());
+            outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
+        }
+
         outState.putParcelable(RecipeDetailActivity.SAVED_STEP, mStep);
     }
 
@@ -252,7 +255,7 @@ public class StepDetailFragment extends Fragment {
         if (Util.SDK_INT <= 23 || mPlayer == null) {
             initializePlayer();
         }
-        if(mPlaybackPosition != 0 && mPlayer != null) {
+        if(Util.SDK_INT > 23 && mPlaybackPosition != 0 && mPlayer != null) {
             mPlayer.seekTo(mCurrentWindow, mPlaybackPosition);
         }
     }
