@@ -52,6 +52,13 @@ public class RecipeDetailActivityTest {
     @Test
     public void openActivity_LoadsRightRecipe() {
         mActivtyTestRule.launchActivity(loadIntent());
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         onView(withId(R.id.tv_recipe_detail_name)).check(matches(withText("Nutella Pie")));
     }
 
@@ -59,6 +66,12 @@ public class RecipeDetailActivityTest {
     public void openDetailActivity_indregientsAreLoaded() {
         String INGREDIENT = "• 0.5 cup of granulated sugar";
         mActivtyTestRule.launchActivity(loadIntent());
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         onView(allOf(withId(R.id.tv_ingredients_item), withText(INGREDIENT)))
                 .check(matches(withText(INGREDIENT)));
@@ -70,8 +83,20 @@ public class RecipeDetailActivityTest {
         String SHORT_DESCRIPTION = "1. Starting prep";
         mActivtyTestRule.launchActivity(loadIntent());
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         onView(withId(R.id.rv_ingredient_and_step_list)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(4, click()));
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         onView(withId(R.id.tv_step_short_description)).check(matches(withText(SHORT_DESCRIPTION)));
 
     }
@@ -80,8 +105,20 @@ public class RecipeDetailActivityTest {
     public void firstStep_prevButtonIsDisabled() {
         mActivtyTestRule.launchActivity(loadIntent());
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         onView(withId(R.id.rv_ingredient_and_step_list)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(3, click()));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         onView(withId(R.id.bt_previous_step)).check(matches(not(isEnabled())));
     }
@@ -90,8 +127,20 @@ public class RecipeDetailActivityTest {
     public void lastStep_nextButtonIsDisabled() {
         mActivtyTestRule.launchActivity(loadIntent());
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         onView(withId(R.id.rv_ingredient_and_step_list)).perform(
                 RecyclerViewActions.actionOnItemAtPosition(6, click()));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         onView(withId(R.id.bt_next_step)).check(matches(not(isEnabled())));
     }

@@ -37,6 +37,10 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  * This Fragment displays details of the step.
  * 1. Title, video if available, and Description
+ * Decisions made on where to place releasePlayer() were based on here:
+ * https://medium.com/fungjai/playing-video-by-exoplayer-b97903be0b33
+ * and here:
+ * https://stackoverflow.com/questions/20831826/when-exactly-are-onsaveinstancestate-and-onrestoreinstancestate-called
  */
 public class StepDetailFragment extends Fragment {
 
@@ -125,7 +129,7 @@ public class StepDetailFragment extends Fragment {
         if(mPlayer != null) {
             outState.putLong(LAST_POSITION, mPlayer.getCurrentPosition());
             outState.putInt(LAST_CURRENT_WINDOW, mPlayer.getCurrentWindowIndex());
-            outState.putBoolean(PLAY_WHEN_READY, mPlayWhenReady);
+            outState.putBoolean(PLAY_WHEN_READY, mPlayer.getPlayWhenReady());
         }
         else {
             // For SDK <= 23 you will need to save mPlayBackPosition and mCurrentWindow and mPlayWhenReady
@@ -271,6 +275,8 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        // Before API Level 24 there is no guarantee of onStop being called. So we have to release
+        // the player as early as possible in onPause.
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
@@ -279,6 +285,9 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        // Starting with API Level 24 (which brought multi and split window mode) onStop
+        // is guaranteed to be called and in the paused mode our activity is eventually still visible.
+        // Hence we need to wait releasing until onStop.
         if (Util.SDK_INT > 23) {
             releasePlayer();
         }
