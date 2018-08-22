@@ -33,6 +33,8 @@ It allows a user to select a recipe and see video-guided steps for how to comple
 Download or clone this repo on your machine, open the project using Android Studio. Once Gradle builds
 the project, click "run" and choose an emulator.
 
+If you have an Android device you can download it on [Google Play](https://play.google.com/store/apps/details?id=com.brunogtavares.bakingtime).
+
 ## User Experience
 
 * Users can select a recipe and view the ingredients and the steps.
