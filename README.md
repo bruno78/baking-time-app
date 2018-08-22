@@ -42,30 +42,13 @@ the project, click "run" and choose an emulator.
 * Users can see recipe steps and navigation between them via a Master Detail Flow.
 * Users can use app widget to display their favorite recipe's ingredients on device's home screen. 
 
-## Progress tasks
-
-- [x] Implement Retrofit / GSON
-- [x] Implement Repository
-- [x] Implement ViewModel to manage Recipe
-- [x] Implement ViewModel to manage communication between fragments (IngredientAndStep, StepDetail)
-- [x] Implement ExoPlayer
-- [x] Fix back button 
-- [x] Improve Exoplayer buffering
-- [x] Implement ExoPlayer full screen in landscape mode
-- [x] Fix issue where app crashes when you select a step after rotation
-- [x] Implement Widget
-- [x] Start Espresso Tests
-- [x] Implement Multiple views
-- [x] Code de dimensions properly - define at values/dimens resource
-- [x] Polish Views
-
-Next steps:
+## Next Steps
 
 - [ ] Click on the widget to get to Recipe Details
+- [ ] Click on the widget to switch recipe ingredients
 - [ ] Add tests to click on next and previous button 
 - [ ] Loading icon 
 - [ ] Improve UI looks
-- [ ] Click on the widget to change recipe ingredients
 
 ## License
 
@@ -77,3 +60,4 @@ This project is part of [Udacity's Android Developer Nanodegree](https://www.uda
 together with [Grow With Google Scholarship.](https://www.udacity.com/grow-with-google)
 
 The rubric for this project can be found [here](https://github.com/bruno78/baking-time-app/blob/master/Rubric.md)
+The mock guidelines for this project can be found [here.](https://github.com/bruno78/baking-time-app/tree/master/screenshots/bakingapp-mocks.pdf)
